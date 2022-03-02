@@ -1,0 +1,29 @@
+* {
+  font-family: 'Assistant', sans-serif;
+}
+
+html {
+  height: 100%;
+  background-color: grey;
+  width: auto;
+}
+
+body {
+  margin: 0px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+header {
+  background-color: #555B6E;
+  height: 10vh;
+}
+
+.hidden {
+  display: none;
+}
