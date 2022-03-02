@@ -22,7 +22,6 @@ const getAllFetch = () => {
   })
 }
 
-
 const displayError = (error) => {
   if (error.message === "Failed to fetch!") {
     errorTag.innerText = "OPPS, SORRY! Something went wrong!";
@@ -38,4 +37,5 @@ const checkErrors = (response) => {
     response.json()
   }
 }
+
 export { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations }
