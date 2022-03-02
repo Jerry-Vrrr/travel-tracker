@@ -4,11 +4,52 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <title>Travel Tracker</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
+  <div class="traveler-view">
+        <header>
+          <div class="left">
+            <h1 class="greeting">Welcome, User</h1>
+            <h2></h2>
+          </div>
+          <div class="right">
+            <button class="logout small-btn">Log Out</button>
+            <h2 id="spending">Total Spent this year: $$</h2>
+          </div>
+        </header>
+        <section class="adventure">
+          <h3>BOOKING</h3>
+          <div class="booking">
+            <label for="start">Start date:
+              <input required type="date" id="start" name="trip-start"
+              min="2000-01-01" max="2035-12-31">
+            </label>
+            <label  for="trip-duration">Duration (days):
+              <input required class="trip-duration" type="number" min="1">
+            </label>
+            <label for="num-travelers">Number of travelers:
+              <input required class="num-travelers" type="number" min="1">
+            </label>
+            <label for="drop">Choose a destination:
+              <select required class="drop" id="destination-drop">
+                <option value="0">destination</option>
+              </select>
+            </label>
+          </div>
+          <h4 class="selection-err hidden"></h4>
+          <button class="book-btn small-btn">button 1</button>
+        </section>
+        <section class="trips">
+          <div class="tabs">
+            <button class="trip-btns" id="upcoming">button 2</button>
+            <button class="trip-btns" id="present">button 3</button>
+            <button class="trip-btns" id="pending">button 4</button>
+            <button class="trip-btns" id="past">button 5</button>
+          </div>
+          <h2 id="trip-type-section"></h2>
+          <div class="card-container">
+          </div>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 
