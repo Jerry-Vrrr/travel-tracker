@@ -4,9 +4,9 @@ const expect = chai.expect;
 describe('See if the tests are running', function() {
 
   beforeEach(() => {
-  }
-  
-  it('should return true', function() {
-    expect(true).to.equal(true);
-  });
+  })
+
+  // it('should return true', function() {
+  //   expect(true).to.equal(true);
+  // });
 });
