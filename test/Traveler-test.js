@@ -125,13 +125,14 @@ testDestinationsData = [
     expect(traveler2).to.be.an.instanceOf(Traveler);
   });
 
-  it('should have an id, name, and traveler type', () => {
+  it.only('should have an id, name, and traveler type', () => {
     expect(traveler.id).to.equal(1);
     expect(traveler.name).to.equal('Ham Leadbeater');
     expect(traveler.type).to.equal('relaxer');
+    console.log(traveler2)
 
-    expect(traveler2.id).to.equal(38);
-    expect(traveler2.name).to.equal('Lazar Leamy');
+    expect(traveler2.id).to.equal(2);
+    expect(traveler2.name).to.equal('Rachael Vaughten');
     expect(traveler2.type).to.equal('thrill-seeker');
   });
 
