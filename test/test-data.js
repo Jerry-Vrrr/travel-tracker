@@ -1,6 +1,5 @@
 
-const testData = {
-  "destinations": [
+  const testDestinationsData = [
  {
  "id": 1,
  "destination": "Lima, Peru",
@@ -151,8 +150,9 @@ const testData = {
  "estimatedFlightCostPerPerson": 500,
  "image": "https://images.unsplash.com/photo-1501684691657-cf3012635478?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80",
  "alt": "a city at night with cloudy, snowy mountains in the distance"
- },],
- "travelers": [
+ },]
+
+ const testTravelersData = [
  {
  "id": 1,
  "name": "Ham Leadbeater",
@@ -282,9 +282,9 @@ const testData = {
  "id": 26,
  "name": "Nisse Norville",
  "travelerType": "relaxer"
-},],
+},]
 
- "trips": [
+ const testTripsData = [
  {
  "id": 1,
  "userID": 44,
@@ -476,7 +476,8 @@ const testData = {
  "suggestedActivities": []
 },]
 
-}
 
 
-export default testData;
+
+
+export default {testDestinationsData, testTripsData, testTravelersData};
