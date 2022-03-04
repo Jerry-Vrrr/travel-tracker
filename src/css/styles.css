@@ -12,11 +12,16 @@ html {
 }
 
 body {
-  @include dimensions(auto, 90vw);
+  /* @include dimensions(auto, 90vw); */
 }
 
 h1 {
+  size: 25px;
   margin: 0;
+}
+
+h2 {
+  size: 10px;
 }
 
 button {
@@ -37,10 +42,6 @@ footer {
 
 .footer-info {
   padding: 0 2% 0 2%;
-}
-
-.hidden {
-  display: none;
 }
 
 .login-page {
@@ -80,4 +81,8 @@ footer {
 
 .login-img {
   height: 15vh;
+}
+
+.hidden {
+  display: none;
 }
