@@ -17,7 +17,9 @@ const classInstantiation = (data) => {
   const destinationsRepo = new Destinations(data[3].destinations)
   const travelersRepo = new Travelers(data[0].travelers)
   const tripRepo = new Trip(data[2])
-console.log(data[1])
+// console.log(data[1])
 }
-
+const getTodaysDate =() {
+  today = new Date();
+}
 window.addEventListener('load', onLoad)
