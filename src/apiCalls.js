@@ -3,10 +3,20 @@ const getSingleTraveler = 'http://localhost:3001/api/v1/travelers/10'
 const getTrips = 'http://localhost:3001/api/v1/trips'
 const getDestinations = 'http://localhost:3001/api/v1/destinations'
 
+//~~~~~~~~~~~~QUERY SELECTORS~~~~~~~~~~~~
+const startDate = document.querySelector("#startDate")
+const tripDuration = document.querySelector("#tripDuration")
+const destinationDropDown = document.querySelector("#destinationDropDown")
+const numTravelers = document.querySelector("#numTravelers")
+const bookBtn = = document.querySelector("#bookBtn")
+//~~~~~~~~~~~~GLOBAL VARIABLES~~~~~~~~~~~
 let allTravelers;
 let oneTraveler;
 let allTrips;
 let allDestinations;
+
+//~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~
+
 
 const getAllFetch = () => {
   allTravelers = fetch('http://localhost:3001/api/v1/travelers')
@@ -20,6 +30,19 @@ const getAllFetch = () => {
   .catch((error) => {
     return displayError(error)
   })
+}
+
+const postTripRequest = (tripInfo) => {
+  fetch('http://localhost:3001/api/v1/trips', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(tripInfo)
+    console.log(tripInfo)
+  })
+  .then(response => {
+    return checkErrors(response)
+  })
+  .catch((error) => displayError(error))
 }
 
 const displayError = (error) => {
@@ -38,4 +61,23 @@ const checkErrors = (response) => {
   }
 }
 
+const submitTripRequest = (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const activityLog = {
+    id: parseInt(formData.get('activity-id')),
+    destinationID: parseInt(formData.get('destinationDropDown')),
+    travelers: parseInt(formData.get('numTravelers')),
+    date: formData.get('startDate'),
+    duration: parseInt(formData.get('tripDuration')),
+    status: formData.get('startDate'),
+  };
+  postTripRequest(tripInfo);
+  e.target.reset();
+  hide(activityForm)
+  show(buttonSection)
+  show(banner)
+}
+
+bookBtn.addEventListener('load', submitTripRequest)
 export { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations }
