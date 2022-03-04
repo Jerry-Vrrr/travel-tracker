@@ -8,7 +8,7 @@ const startDate = document.querySelector("#startDate")
 const tripDuration = document.querySelector("#tripDuration")
 const destinationDropDown = document.querySelector("#destinationDropDown")
 const numTravelers = document.querySelector("#numTravelers")
-const bookBtn = = document.querySelector("#bookBtn")
+const bookBtn = document.querySelector("#bookBtn")
 //~~~~~~~~~~~~GLOBAL VARIABLES~~~~~~~~~~~
 let allTravelers;
 let oneTraveler;
@@ -37,7 +37,7 @@ const postTripRequest = (tripInfo) => {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(tripInfo)
-    console.log(tripInfo)
+    // console.log(tripInfo)
   })
   .then(response => {
     return checkErrors(response)

@@ -5,7 +5,7 @@ import Travelers from './Travelers';
 import Trip from './Trip';
 import { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations } from './apiCalls.js'
 
-// import './images/turing-logo.png'
+import './images/airplane-plane-pngrepo-com.png'
 
 //~~~~~~~~~~~~QUERY SELECTORS~~~~~~~~~~~~
 
@@ -13,10 +13,9 @@ const upcomingTrp = document.querySelector("#upcomingTrp")
 const presentTrp = document.querySelector("#presentTrp")
 const pendingTrp = document.querySelector("#destinationDropDown")
 const pastTrp = document.querySelector("#numTravelers")
-
-
-
-
+const submitLoginBtn = document.querySelector("#submitLoginBtn")
+const loginPage = document.querySelector("#loginPage")
+const mainPage = document.querySelector("#mainPage")
 
 //~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~
 const onLoad = () => {
@@ -34,13 +33,19 @@ const classInstantiation = (data) => {
 // const getTodaysDate =() {
 //   today = new Date();
 // }
-
-const show = (section) => {
-  section.classList.toggle('hidden')
+const loginSubmit = () => {
+  show(mainPage)
+  hide(loginPage)
+  console.log('banana')
 }
 
 const hide = (section) => {
   section.classList.toggle('hidden')
 }
 
+const show = (section) => {
+  section.classList.toggle('hidden')
+}
+
+submitLoginBtn.addEventListener('click', loginSubmit)
 window.addEventListener('load', onLoad)

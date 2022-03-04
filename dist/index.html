@@ -7,9 +7,27 @@
   <title>Travel Tracker</title>
 </head>
 <body>
-  <div class="traveler-view">
+</div>
+<div class="login-section" id="loginSection">
+<section class="login-page"id="loginPage" >
+<h1>Welcome to Wanderlist!</h1>
+<h2>Enter Your Login info to continue</h2>
+<img class="login-img" src="./images/airplane-plane-pngrepo-com.png" alt="plane taking off logo">
+<div class="login-inputs">
+  <p class="login-error hidden">Incorrect password or username, <br> please try again!</p>
+  <label for="username" class="login-labels">Username:
+    <input type="text" placeholder="username" id="username" name="user-name">
+  </label>
+  <label for="password" class="login-labels"> Password:
+    <input type="password" placeholder="password" id="password" name="password">
+  </label>
+  <button class="submit small-btn" id="submitLoginBtn">Login</button>
+</div>
+</div>
+  <div class="main-page hidden" id="mainPage">
         <header>
           <div class="left">
+            <img class="login-img" src="./images/airplane-plane-pngrepo-com.png" alt="plane taking off logo">
             <h1 class="greeting">Welcome, User</h1>
             <h2></h2>
           </div>
@@ -49,7 +67,8 @@
           </div>
           <h2 id="trip-type-section"></h2>
           <div class="card-container">
-          </div>
+        </section>
+    </div>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 
