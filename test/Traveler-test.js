@@ -11,7 +11,7 @@ describe('Traveler', () => {
   let testTravelersData;
   let testTripsData;
   let testDestinationsData;
-  let today = new Date()
+  // let today = new Date()
   beforeEach(() => {
   testTravelersData = [
     {
