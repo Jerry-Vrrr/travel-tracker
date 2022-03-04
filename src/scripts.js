@@ -1,9 +1,11 @@
+//~~~~~~~~~~~~IMPORTS~~~~~~~~~~~~~~~~~~~
 
+import {greetUser, } from './domUpdates.js';
 import './css/styles.css';
 import Destinations from './Destinations';
 import Travelers from './Travelers';
 import Trip from './Trip';
-import { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations } from './apiCalls.js'
+import { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations, destinationsDropList } from './apiCalls.js'
 
 import './images/airplane-plane-pngrepo-com.png'
 
@@ -28,6 +30,8 @@ const classInstantiation = (data) => {
   const destinationsRepo = new Destinations(data[3].destinations)
   const travelersRepo = new Travelers(data[0].travelers)
   const tripRepo = new Trip(data[2])
+  console.log()
+  destinationsDropList(destinationsRepo.destinations)
 }
 
 // const getTodaysDate =() {
@@ -36,7 +40,8 @@ const classInstantiation = (data) => {
 const loginSubmit = () => {
   show(mainPage)
   hide(loginPage)
-  console.log('banana')
+  greetUser()
+  // console.log('banana')
 }
 
 const hide = (section) => {

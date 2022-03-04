@@ -74,10 +74,22 @@ const submitTripRequest = (e) => {
   };
   postTripRequest(tripInfo);
   e.target.reset();
-  hide(activityForm)
-  show(buttonSection)
-  show(banner)
+  destinationDropDown()
 }
 
+const destinationsDropList = (destinations) => {
+  let destinationList = destinations.map(destination => destination.destination)
+  // dd1.innerHTML = '';
+  // let loopList = destinationList.forEach(destination => {
+  //   let newOption = document.createElement('option')
+  //   newOption.value = destination.toLowerCase
+  //   dd1.options.add(newOption)
+
+
+
+  })
+  console.log(destinationList)
+}
+// console.log(destinationDropDown)
 bookBtn.addEventListener('load', submitTripRequest)
-export { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations }
+export { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations, destinationsDropList }

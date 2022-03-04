@@ -2,6 +2,7 @@ class Destinations {
   constructor(allDestinations) {
     this.destinations = allDestinations;
   }
+
 }
 
 
