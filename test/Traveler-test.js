@@ -120,10 +120,9 @@ testDestinationsData = [
     traveler2 = new Traveler(testTravelersData[1], today);
   })
 
-  it.only('should be an instantiation of Traveler', () => {
+  it('should be an instantiation of Traveler', () => {
     expect(traveler).to.be.an.instanceOf(Traveler);
     expect(traveler2).to.be.an.instanceOf(Traveler);
-    console.log(traveler)
   });
 
   it('should have an id, name, and traveler type', () => {
