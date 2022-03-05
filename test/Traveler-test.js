@@ -212,11 +212,10 @@ testDestinationsData = [
     expect(traveler2.past.length).to.equal(4);
   })
 
-  it('should be able to calculate amount of money spend in last 365 days', () => {
+  it.only('should be able to calculate amount of money spend in last 365 days', () => {
     traveler.makeAllTrips(testTripsData, testDestinationsData);
-    expect(traveler.calculateMoneySpentThisYear()).to.equal(18304);
-
+    expect(traveler.calculateYearlyTravelCost()).to.equal(18304);
     traveler2.makeAllTrips(testTripsData, testDestinationsData);
-    expect(traveler2.calculateMoneySpentThisYear()).to.equal(10967);
+    expect(traveler2.calculateYearlyTravelCost()).to.equal(10967);
   });
 })

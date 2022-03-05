@@ -13,6 +13,7 @@ class Traveler {
     this.todaysDate = 0;
   }
 
+
   makeAllTrips(trips, destinations) {
     let currentDestination;
     trips.forEach(trip => {
@@ -21,7 +22,6 @@ class Traveler {
           this.allTrips.push(new Trip(trip, currentDestination));
       })
     })
-    console.log(this.allTrips[1])
     return this.allTrips
   }
 
@@ -34,6 +34,24 @@ class Traveler {
     return firstName[0]
   }
 
+  calculateYearlyTravelCost() {
+    let pastYearTrips = this.allTrips.filter(trip => {
+      trip.findTripDuration();
+      let yearStart = new Date(this.todaysDate).setDate(new Date(this.todaysDate).getDate() - 365);
+      if (trip.tripStartDate > yearStart) {
+        return trip;
+      }
+    });
+
+    const annual = pastYearTrips.reduce((annualSpent, trip) => {
+      trip.estimatedTripCost();
+      annualSpent += trip.tripCost;
+      return annualSpent;
+    }, 0);
+
+    return annual;
+  
+  }
 }
 
 
