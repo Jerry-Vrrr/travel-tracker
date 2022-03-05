@@ -27,7 +27,7 @@ class Traveler {
 
   getUserName() {
   if (!this.name) {
-    return 'Friend'
+    return 'Hi, Friend Please Add Your Name To Your User Profile'
   }
     let name = this.name
     let firstName = name.split(' ')

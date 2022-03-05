@@ -23,6 +23,11 @@ describe('Traveler', () => {
     "id": 2,
     "name": "Rachael Vaughten",
     "travelerType": "thrill-seeker"
+  },
+  {
+  "id": 3,
+  "name": "",
+  "travelerType": "thrill-seeker"
   }];
   testTripsData = [
   {
@@ -126,10 +131,14 @@ testDestinationsData = [
   });
 
   it.only('should return a first name', () => {
-
-    traveler2.getUserName()
     expect(traveler.getUserName()).to.equal('Ham');
     expect(traveler2.getUserName()).to.equal('Rachael');
+  });
+
+  it.only('should not return an empty name', () => {
+    let traveler0 = new Traveler(testTravelersData[2], today)
+    expect(traveler.getUserName()).to.equal('Ham');
+    expect(traveler0.getUserName()).to.equal('Hi, Friend Please Add Your Name To Your User Profile');
   });
 
   it('should have an id, name, and traveler type', () => {
