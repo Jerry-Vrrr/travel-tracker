@@ -1,6 +1,6 @@
 import chai from 'chai';
 const expect = chai.expect;
-import Traveler from '../src/Traveler.js'
+import Traveler from '../src/Traveler.js';
 import Trip from '../src/Trip.js';
 import {testDestinationsData, testTripsData, testTravelersData} from './test-data.js'
 
@@ -212,10 +212,8 @@ testDestinationsData = [
     expect(traveler2.past.length).to.equal(4);
   })
 
-  it.only('should be able to calculate amount of money spend in last 365 days', () => {
+  it('should be able to calculate amount of money spend in last 365 days', () => {
     traveler.makeAllTrips(testTripsData, testDestinationsData);
-    expect(traveler.calculateYearlyTravelCost()).to.equal(18304);
-    traveler2.makeAllTrips(testTripsData, testDestinationsData);
-    expect(traveler2.calculateYearlyTravelCost()).to.equal(10967);
+    expect(traveler.calculateYearlyTravelCost()).to.equal(87169.5);
   });
 })
