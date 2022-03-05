@@ -125,18 +125,23 @@ testDestinationsData = [
     expect(traveler2).to.be.an.instanceOf(Traveler);
   });
 
+  it.only('should return a first name', () => {
+
+    traveler2.getUserName()
+    expect(traveler.getUserName()).to.equal('Ham');
+    expect(traveler2.getUserName()).to.equal('Rachael');
+  });
+
   it('should have an id, name, and traveler type', () => {
     expect(traveler.id).to.equal(1);
     expect(traveler.name).to.equal('Ham Leadbeater');
     expect(traveler.type).to.equal('relaxer');
-    console.log(traveler2)
-
     expect(traveler2.id).to.equal(2);
     expect(traveler2.name).to.equal('Rachael Vaughten');
     expect(traveler2.type).to.equal('thrill-seeker');
   });
 
-  it.only('should create a list of instantiations of the users trips', () => {
+  it('should create a list of instantiations of the users trips', () => {
     traveler.makeAllTrips(testTripsData, testDestinationsData);
     expect(traveler.allTrips[0]).to.be.an.instanceOf(Trip);
     expect(traveler.allTrips.length).to.equal(24)

@@ -25,6 +25,14 @@ class Traveler {
     return this.allTrips
   }
 
+  getUserName() {
+  if (!this.name) {
+    return 'Friend'
+  }
+    let name = this.name
+    let firstName = name.split(' ')
+    return firstName[0]
+  }
 
 }
 
