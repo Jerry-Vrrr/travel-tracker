@@ -1,12 +1,11 @@
 //~~~~~~~~~~~~IMPORTS~~~~~~~~~~~~~~~~~~~
-
-import {greetUser, } from './domUpdates.js';
+import {greetUser} from './domUpdates.js';
 import './css/styles.css';
 import Destinations from './Destinations';
 import Travelers from './Travelers';
+import Traveler from './Traveler';
 import Trip from './Trip';
 import { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations, destinationsDropList } from './apiCalls.js'
-
 import './images/airplane-plane-pngrepo-com.png'
 
 //~~~~~~~~~~~~QUERY SELECTORS~~~~~~~~~~~~
@@ -18,8 +17,16 @@ const pastTrp = document.querySelector("#numTravelers")
 const submitLoginBtn = document.querySelector("#submitLoginBtn")
 const loginPage = document.querySelector("#loginPage")
 const mainPage = document.querySelector("#mainPage")
-
+const username = document.querySelector("#username")
+const password = document.querySelector("#password")
 //~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~
+
+const todaysDate = () => {
+const today = new Date();
+const date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
+return date
+}
+
 const onLoad = () => {
   getAllFetch();
   Promise.all([allTravelers, oneTraveler, allTrips, allDestinations])
@@ -27,21 +34,34 @@ const onLoad = () => {
 }
 
 const classInstantiation = (data) => {
+  let date = todaysDate()
   const destinationsRepo = new Destinations(data[3].destinations)
-  const travelersRepo = new Travelers(data[0].travelers)
-  const tripRepo = new Trip(data[2])
-  console.log()
+  const travelersRepo = new Travelers(data[0].travelers, date)
+  const traveler = new Traveler(data[0].travelers, date)
   destinationsDropList(destinationsRepo.destinations)
+  manageTravelerData(travelersRepo)
+  console.log(date)
 }
 
-// const getTodaysDate =() {
-//   today = new Date();
-// }
+const manageTravelerData = () => {
+  greetUser()
+}
+
 const loginSubmit = () => {
   show(mainPage)
   hide(loginPage)
-  greetUser()
-  // console.log('banana')
+  verifyUser()
+}
+
+const verifyUser = (e) => {
+  const formData = new FormData(e.target);
+  const userLogin = {
+  username: formData.get('#username'),
+  password: formData.get('#password'),
+  }
+  console.log(userLogin)
+  e.target.reset();
+  loginSubmit()
 }
 
 const hide = (section) => {
@@ -52,5 +72,5 @@ const show = (section) => {
   section.classList.toggle('hidden')
 }
 
-submitLoginBtn.addEventListener('click', loginSubmit)
+submitLoginBtn.addEventListener('click', verifyUser)
 window.addEventListener('load', onLoad)

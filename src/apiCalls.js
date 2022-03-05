@@ -85,11 +85,8 @@ const destinationsDropList = (destinations) => {
   //   newOption.value = destination.toLowerCase
   //   dd1.options.add(newOption)
 
+  }
 
-
-  })
-  console.log(destinationList)
-}
 // console.log(destinationDropDown)
 bookBtn.addEventListener('load', submitTripRequest)
 export { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations, destinationsDropList }
