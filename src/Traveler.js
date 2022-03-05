@@ -16,12 +16,14 @@ class Traveler {
 
   makeAllTrips(trips, destinations) {
     let currentDestination;
-    trips.forEach(trip => {
+    let filteredTrips = trips.filter(trip => trip.userID === this.id);
+    filteredTrips.forEach(trip => {
       destinations.forEach(location => {
           currentDestination = location;
           this.allTrips.push(new Trip(trip, currentDestination));
       })
     })
+    console.log(this.allTrips[0])
     return this.allTrips
   }
 
@@ -48,9 +50,7 @@ class Traveler {
       annualSpent += trip.tripCost;
       return annualSpent;
     }, 0);
-
     return annual;
-  
   }
 }
 

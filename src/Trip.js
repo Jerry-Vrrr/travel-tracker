@@ -12,6 +12,21 @@ class Trip {
   this.tripEndDate;
   this.tripCost;
   }
+  estimatedTripCost() {
+      const totalLodging = this.destination.estimatedLodgingCostPerDay * this.duration;
+      const totalFlight = this.destination.estimatedFlightCostPerPerson * this.travelerCount;
+      const tripCost = totalLodging + totalFlight;
+      const costWithAgentFee = tripCost + (tripCost * .10);
+      this.tripCost = costWithAgentFee;
+      return costWithAgentFee;
+    }
+
+    findTripDuration() {
+      let tripStart = new Date(this.date);
+      let tripEnd = new Date(this.date).setDate(new Date(this.date).getDate() + this.duration);
+      this.tripStartDate = tripStart.getTime();
+      this.tripEndDate = tripEnd;
+    }
 }
 
 

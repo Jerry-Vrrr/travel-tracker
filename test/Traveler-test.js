@@ -15,7 +15,7 @@ describe('Traveler', () => {
   beforeEach(() => {
   testTravelersData = [
     {
-    "id": 1,
+    "id": 44,
     "name": "Ham Leadbeater",
     "travelerType": "relaxer"
     },
@@ -130,19 +130,19 @@ testDestinationsData = [
     expect(traveler2).to.be.an.instanceOf(Traveler);
   });
 
-  it.only('should return a first name', () => {
+  it('should return a first name', () => {
     expect(traveler.getUserName()).to.equal('Ham');
     expect(traveler2.getUserName()).to.equal('Rachael');
   });
 
-  it.only('should not return an empty name', () => {
+  it('should not return an empty name', () => {
     let traveler0 = new Traveler(testTravelersData[2], today)
     expect(traveler.getUserName()).to.equal('Ham');
     expect(traveler0.getUserName()).to.equal('Hi, Friend Please Add Your Name To Your User Profile');
   });
 
   it('should have an id, name, and traveler type', () => {
-    expect(traveler.id).to.equal(1);
+    expect(traveler.id).to.equal(44);
     expect(traveler.name).to.equal('Ham Leadbeater');
     expect(traveler.type).to.equal('relaxer');
     expect(traveler2.id).to.equal(2);
@@ -150,10 +150,11 @@ testDestinationsData = [
     expect(traveler2.type).to.equal('thrill-seeker');
   });
 
-  it.only('should create a list of instantiations of the users trips', () => {
+  it('should create a list of instantiations of the users trips', () => {
     traveler.makeAllTrips(testTripsData, testDestinationsData);
     expect(traveler.allTrips[0]).to.be.an.instanceOf(Trip);
-    expect(traveler.allTrips.length).to.equal(24)
+    expect(traveler2.allTrips.length).to.equal(0)
+    expect(traveler.allTrips.length).to.equal(6)
     expect(traveler.allTrips[0]).to.deep.equal( {
   id: 1,
   userID: 44,
@@ -170,33 +171,10 @@ testDestinationsData = [
   duration: 8,
   status: 'approved',
   activities: []
-
-})
-
-
-    traveler2.makeAllTrips(testTripsData, testDestinationsData);
-    expect(traveler2.allTrips[0]).to.be.an.instanceOf(Trip);
-    expect(traveler2.allTrips.length).to.equal(24)
-    expect(traveler2.allTrips[1]).to.deep.equal({
-  id: 1,
-  userID: 44,
-  destination: {
-    id: 2,
-    destination: 'Stockholm, Sweden',
-    estimatedLodgingCostPerDay: 100,
-    estimatedFlightCostPerPerson: 780,
-    image: 'https://images.unsplash.com/photo-1560089168-6516081f5bf1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
-    alt: 'city with boats on the water during the day time'
-  },
-  travelerCount: 1,
-  date: '2022/09/16',
-  duration: 8,
-  status: 'approved',
-  activities: []
-})
   })
+})
 
-  it('should be able to sort out present, upcoming, past, and pending trips', () => {
+  it.only('should be able to sort out present, upcoming, past, and pending trips', () => {
     traveler.makeAllTrips(testTripsData, testDestinationsData);
     traveler.sortAllTrips();
     expect(traveler.present.length).to.equal(1);
@@ -214,6 +192,6 @@ testDestinationsData = [
 
   it('should be able to calculate amount of money spend in last 365 days', () => {
     traveler.makeAllTrips(testTripsData, testDestinationsData);
-    expect(traveler.calculateYearlyTravelCost()).to.equal(87169.5);
+    expect(traveler.calculateYearlyTravelCost()).to.equal(9570);
   });
 })
