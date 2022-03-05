@@ -21,7 +21,7 @@ class Traveler {
           this.allTrips.push(new Trip(trip, currentDestination));
       })
     })
-    console.log(this.allTrips)
+    console.log(this.allTrips[1])
     return this.allTrips
   }
 

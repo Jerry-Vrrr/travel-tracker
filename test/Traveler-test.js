@@ -150,7 +150,7 @@ testDestinationsData = [
     expect(traveler2.type).to.equal('thrill-seeker');
   });
 
-  it('should create a list of instantiations of the users trips', () => {
+  it.only('should create a list of instantiations of the users trips', () => {
     traveler.makeAllTrips(testTripsData, testDestinationsData);
     expect(traveler.allTrips[0]).to.be.an.instanceOf(Trip);
     expect(traveler.allTrips.length).to.equal(24)
@@ -177,7 +177,23 @@ testDestinationsData = [
     traveler2.makeAllTrips(testTripsData, testDestinationsData);
     expect(traveler2.allTrips[0]).to.be.an.instanceOf(Trip);
     expect(traveler2.allTrips.length).to.equal(24)
-    expect(traveler2.allTrips[0]).to.deep.equal()
+    expect(traveler2.allTrips[1]).to.deep.equal({
+  id: 1,
+  userID: 44,
+  destination: {
+    id: 2,
+    destination: 'Stockholm, Sweden',
+    estimatedLodgingCostPerDay: 100,
+    estimatedFlightCostPerPerson: 780,
+    image: 'https://images.unsplash.com/photo-1560089168-6516081f5bf1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
+    alt: 'city with boats on the water during the day time'
+  },
+  travelerCount: 1,
+  date: '2022/09/16',
+  duration: 8,
+  status: 'approved',
+  activities: []
+})
   })
 
   it('should be able to sort out present, upcoming, past, and pending trips', () => {
