@@ -1,5 +1,4 @@
 //~~~~~~~~~~~~IMPORTS~~~~~~~~~~~~~~~~~~~
-
 import {greetUser} from './domUpdates.js';
 import './css/styles.css';
 import Destinations from './Destinations';
@@ -21,6 +20,13 @@ const mainPage = document.querySelector("#mainPage")
 const username = document.querySelector("#username")
 const password = document.querySelector("#password")
 //~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~
+
+const todaysDate = () => {
+const today = new Date();
+const date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
+return date
+}
+
 const onLoad = () => {
   getAllFetch();
   Promise.all([allTravelers, oneTraveler, allTrips, allDestinations])
@@ -28,28 +34,26 @@ const onLoad = () => {
 }
 
 const classInstantiation = (data) => {
+  let date = todaysDate()
   const destinationsRepo = new Destinations(data[3].destinations)
-  const travelersRepo = new Travelers(data[0].travelers)
+  const travelersRepo = new Travelers(data[0].travelers, date)
+  const traveler = new Traveler(data[0].travelers, date)
   destinationsDropList(destinationsRepo.destinations)
   manageTravelerData(travelersRepo)
+  console.log(date)
 }
 
 const manageTravelerData = () => {
-
   greetUser()
 }
-// const getTodaysDate =() {
-//   today = new Date();
-// }
+
 const loginSubmit = () => {
   show(mainPage)
   hide(loginPage)
   verifyUser()
-  // console.log('banana')
 }
 
 const verifyUser = (e) => {
-  // e.preventDefault();
   const formData = new FormData(e.target);
   const userLogin = {
   username: formData.get('#username'),

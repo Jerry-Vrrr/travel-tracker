@@ -11,7 +11,6 @@ describe('Traveler', () => {
   let testTravelersData;
   let testTripsData;
   let testDestinationsData;
-  // let today = new Date()
   beforeEach(() => {
   testTravelersData = [
     {
@@ -35,7 +34,7 @@ describe('Traveler', () => {
   "userID": 44,
   "destinationID": 49,
   "travelers": 1,
-  "date": "2022/09/16",
+  "date": "2023/09/16",
   "duration": 8,
   "status": "approved",
   "suggestedActivities": []
@@ -176,14 +175,14 @@ testDestinationsData = [
 
   it.only('should be able to sort out present, upcoming, past, and pending trips', () => {
     traveler.makeAllTrips(testTripsData, testDestinationsData);
-    traveler.sortAllTrips();
+    traveler.sortTrips();
     expect(traveler.present.length).to.equal(1);
     expect(traveler.upcoming.length).to.equal(1);
     expect(traveler.pending.length).to.equal(1);
     expect(traveler.past.length).to.equal(1);
 
     traveler2.makeAllTrips(testTripsData, testDestinationsData);
-    traveler2.sortAllTrips();
+    traveler2.sortTrips();
     expect(traveler2.present.length).to.equal(0);
     expect(traveler2.upcoming.length).to.equal(0);
     expect(traveler2.pending.length).to.equal(1);

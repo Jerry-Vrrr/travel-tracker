@@ -1,7 +1,7 @@
 import Trip from './Trip.js';
 
 class Traveler {
-  constructor(travelerData, today) {
+  constructor(travelerData, date) {
     this.id = travelerData.id;
     this.name = travelerData.name;
     this.type = travelerData.travelerType;
@@ -10,9 +10,8 @@ class Traveler {
     this.present = [];
     this.past = [];
     this.pending = [];
-    this.todaysDate = 0;
+    this.todaysDate = date;
   }
-
 
   makeAllTrips(trips, destinations) {
     let currentDestination;
@@ -23,7 +22,6 @@ class Traveler {
           this.allTrips.push(new Trip(trip, currentDestination));
       })
     })
-    console.log(this.allTrips[0])
     return this.allTrips
   }
 
@@ -39,7 +37,7 @@ class Traveler {
   calculateYearlyTravelCost() {
     let pastYearTrips = this.allTrips.filter(trip => {
       trip.findTripDuration();
-      let yearStart = new Date(this.todaysDate).setDate(new Date(this.todaysDate).getDate() - 365);
+      let yearStart = (this.todaysDate).setDate(new Date(this.todaysDate).getDate() - 365);
       if (trip.tripStartDate > yearStart) {
         return trip;
       }
@@ -52,7 +50,56 @@ class Traveler {
     }, 0);
     return annual;
   }
-}
 
+  sortTrips() {
+    this.sortPresentTrips();
+    this.sortPastTrips();
+    this.sortPendingTrips();
+    this.sortUpcomingTrips()
+    // console.log('past', this.past)
+    // console.log('present', this.present)
+    // console.log('future', this.upcoming)
+  }
+
+  sortPresentTrips() {
+    this.allTrips.forEach(trip => {
+      let today = this.todaysDate
+      let tripDate = trip.date.split('/').join("")
+      if (tripDate == today && !this.present.includes(trip)) {
+        this.present.push(trip);
+      }
+    })
+  }
+
+  sortUpcomingTrips() {
+    this.allTrips.forEach(trip => {
+      let tripDate = trip.date.split('/').join("")
+      let today = this.todaysDate
+      if (tripDate < today && !this.past.includes(trip)) {
+        this.past.push(trip);
+      }
+    })
+  }
+
+  sortPastTrips() {
+    this.allTrips.forEach(trip => {
+      let today = this.todaysDate
+      let tripDate = trip.date.split('/').join("")
+      if (tripDate > today && !this.upcoming.includes(trip)) {
+        this.upcoming.push(trip);
+      }
+    })
+  }
+
+  sortPendingTrips() {
+    let pendingTrips = this.allTrips.filter(trip => trip.status === 'pending');
+    pendingTrips.forEach(trip => {
+      if (!this.pending.includes(trip)) {
+        this.pending.push(trip);
+      }
+    })
+  }
+
+}
 
 export default Traveler;
