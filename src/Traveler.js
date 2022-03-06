@@ -18,8 +18,10 @@ class Traveler {
     let filteredTrips = trips.filter(trip => trip.userID === this.id);
     filteredTrips.forEach(trip => {
       destinations.forEach(location => {
+        if (trip.destinationID === location.id) {
           currentDestination = location;
           this.allTrips.push(new Trip(trip, currentDestination));
+        }
       })
     })
     return this.allTrips

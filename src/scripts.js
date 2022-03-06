@@ -1,5 +1,5 @@
 //~~~~~~~~~~~~IMPORTS~~~~~~~~~~~~~~~~~~~
-import {greetUser, displayYearlySpending, displayTrips} from './domUpdates.js';
+import {greetUser, displayYearlySpending, displayTrips, invalidLogin, loginSubmit} from './domUpdates.js';
 import './css/styles.css';
 import Destinations from './Destinations';
 import Travelers from './Travelers';
@@ -20,6 +20,12 @@ const mainPage = document.querySelector("#mainPage")
 const username = document.querySelector("#username")
 const password = document.querySelector("#password")
 //~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~
+let currentUserId;
+
+const callOrder = () => {
+getUserId()
+
+}
 
 const todaysDate = () => {
 const today = new Date();
@@ -27,7 +33,22 @@ const date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
 return date
 }
 
-const onLoad = () => {
+const getUserId = () => {
+  currentUserId = username.value.slice(8)
+  verifyUser()
+  promiseAll()
+}
+
+const verifyUser = () => {
+  let userLogin = username.value.slice(0,8)
+  if (userLogin == 'traveler' && password.value ==  'travel') {
+    loginSubmit()
+  } else {
+    invalidLogin()
+  }
+}
+
+const promiseAll = () => {
   getAllFetch();
   Promise.all([allTravelers, oneTraveler, allTrips, allDestinations])
   .then(data => classInstantiation(data))
@@ -37,47 +58,20 @@ const classInstantiation = (data) => {
   let date = todaysDate()
   const destinationsRepo = new Destinations(data[3].destinations)
   const travelersRepo = new Travelers(data[0].travelers, date)
-  const traveler = new Traveler(data[0].travelers[1], date)
+  const traveler = new Traveler(data[0].travelers[currentUserId], date)
   const tripRepo = data[2].trips
   destinationsDropList(destinationsRepo.destinations)
   manageTravelerData(traveler, tripRepo, destinationsRepo)
 }
 
 const manageTravelerData = (traveler, tripRepo, destinationsRepo) => {
-console.log(tripRepo[0])
-console.log(destinationsRepo.destinations[0])
   greetUser(traveler.getUserName())
   displayYearlySpending(traveler.calculateYearlyTravelCost())
-  displayTrips(traveler)
   traveler.makeAllTrips(tripRepo, destinationsRepo.destinations)
-  console.log(traveler.makeAllTrips(tripRepo, destinationsRepo.destinations)[0])
-  
+  displayTrips(traveler)
 }
 
-const loginSubmit = () => {
-  show(mainPage)
-  hide(loginPage)
-  // verifyUser()
-}
 
-const verifyUser = (e) => {
-  // const formData = new FormData(e.target);
-  // const userLogin = {
-  // username: formData.get('#username'),
-  // password: formData.get('#password'),
-  // }
-  // console.log(userLogin)
-  // e.target.reset();
-  loginSubmit()
-}
 
-const hide = (section) => {
-  section.classList.toggle('hidden')
-}
-
-const show = (section) => {
-  section.classList.toggle('hidden')
-}
-
-submitLoginBtn.addEventListener('click', verifyUser)
-window.addEventListener('load', onLoad)
+submitLoginBtn.addEventListener('click', callOrder)
+// window.addEventListener('load', onLoad)

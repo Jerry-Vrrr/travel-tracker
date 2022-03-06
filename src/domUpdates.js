@@ -2,8 +2,8 @@
 //~~~~~~~~~~~~QUERY SELECTORS~~~~~~~~~~~~
 const greeting = document.querySelector("#greeting")
 const spending = document.querySelector("#spending")
-const tripCards = document.querySelector('.card-container');
-
+const tripCards = document.querySelector('#cardContainer');
+const loginMessage = document.querySelector('#loginMessage');
 
 const greetUser = (greetings) => {
   // console.log(greeting)
@@ -14,11 +14,21 @@ const displayYearlySpending = (total) => {
   spending.innerText = total
 }
 
-const displayTrips = (currentUser) => {
+const invalidLogin = () => {
+  loginMessage.innerText = 'Invalid Login and/or Password. Try Again.'
+}
+
+const loginSubmit = () => {
+  show(mainPage)
+  hide(loginPage)
+}
+
+const displayTrips = (traveler) => {
+  console.log(traveler)
     tripCards.innerHTML = '';
     let tripInfo = '';
-    if (currentUser.allTrips.length > 0) {
-      currentUser.allTrips.forEach(trip => {
+    if (traveler.allTrips.length > 0) {
+      traveler.allTrips.forEach(trip => {
         // const formattedDate = this.formatDate(trip.date);
         tripInfo += `
         <article class="trip-cards">
@@ -26,7 +36,7 @@ const displayTrips = (currentUser) => {
         <img class="trip-img" src=${trip.destination.image} alt=${trip.destination.alt}>
         </div>
         <h3 class="destination-name">${trip.destination.destination}</h3>
-        <p>Trip date: ${formattedDate} <br>
+        <p>Trip date:  <br>
         Travelers: ${trip.travelerCount} <br>
         Duration: ${trip.duration} <br>
         Status: ${trip.status} <br> </p>
@@ -42,4 +52,11 @@ const displayTrips = (currentUser) => {
     tripCards.insertAdjacentHTML('beforeend', tripInfo);
   }
 
-export {greetUser, displayYearlySpending, displayTrips}
+  const hide = (section) => {
+    section.classList.toggle('hidden')
+  }
+
+  const show = (section) => {
+    section.classList.toggle('hidden')
+  }
+export {greetUser, displayYearlySpending, displayTrips, invalidLogin, loginSubmit}
