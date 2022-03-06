@@ -1,5 +1,5 @@
 //~~~~~~~~~~~~IMPORTS~~~~~~~~~~~~~~~~~~~
-import {greetUser, displayYearlySpending, displayTrips, invalidLogin} from './domUpdates.js';
+import {greetUser, displayYearlySpending, displayTrips, invalidLogin, loginSubmit} from './domUpdates.js';
 import './css/styles.css';
 import Destinations from './Destinations';
 import Travelers from './Travelers';
@@ -44,20 +44,11 @@ const classInstantiation = (data) => {
 }
 
 const manageTravelerData = (traveler, tripRepo, destinationsRepo) => {
-console.log(tripRepo[0])
-console.log(destinationsRepo.destinations[0])
   greetUser(traveler.getUserName())
   displayYearlySpending(traveler.calculateYearlyTravelCost())
-  displayTrips(traveler)
   traveler.makeAllTrips(tripRepo, destinationsRepo.destinations)
-  console.log(traveler.makeAllTrips(tripRepo, destinationsRepo.destinations)[0])
-
-}
-
-const loginSubmit = () => {
-  show(mainPage)
-  hide(loginPage)
-  // verifyUser()
+  displayTrips(traveler)
+  // console.log(traveler.makeAllTrips(tripRepo, destinationsRepo.destinations))
 }
 
 const verifyUser = () => {
@@ -67,17 +58,6 @@ const verifyUser = () => {
   } else {
     invalidLogin()
   }
-
-  console.log(password.value)
-
-}
-
-const hide = (section) => {
-  section.classList.toggle('hidden')
-}
-
-const show = (section) => {
-  section.classList.toggle('hidden')
 }
 
 submitLoginBtn.addEventListener('click', verifyUser)
