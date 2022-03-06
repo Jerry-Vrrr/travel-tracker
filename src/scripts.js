@@ -20,6 +20,12 @@ const mainPage = document.querySelector("#mainPage")
 const username = document.querySelector("#username")
 const password = document.querySelector("#password")
 //~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~
+let currentUserId;
+
+const callOrder = () => {
+getUserId()
+
+}
 
 const todaysDate = () => {
 const today = new Date();
@@ -27,28 +33,10 @@ const date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
 return date
 }
 
-const onLoad = () => {
-  getAllFetch();
-  Promise.all([allTravelers, oneTraveler, allTrips, allDestinations])
-  .then(data => classInstantiation(data))
-}
-
-const classInstantiation = (data) => {
-  let date = todaysDate()
-  const destinationsRepo = new Destinations(data[3].destinations)
-  const travelersRepo = new Travelers(data[0].travelers, date)
-  const traveler = new Traveler(data[0].travelers[1], date)
-  const tripRepo = data[2].trips
-  destinationsDropList(destinationsRepo.destinations)
-  manageTravelerData(traveler, tripRepo, destinationsRepo)
-}
-
-const manageTravelerData = (traveler, tripRepo, destinationsRepo) => {
-  greetUser(traveler.getUserName())
-  displayYearlySpending(traveler.calculateYearlyTravelCost())
-  traveler.makeAllTrips(tripRepo, destinationsRepo.destinations)
-  displayTrips(traveler)
-  // console.log(traveler.makeAllTrips(tripRepo, destinationsRepo.destinations))
+const getUserId = () => {
+  currentUserId = username.value.slice(8)
+  verifyUser()
+  promiseAll()
 }
 
 const verifyUser = () => {
@@ -60,5 +48,30 @@ const verifyUser = () => {
   }
 }
 
-submitLoginBtn.addEventListener('click', verifyUser)
-window.addEventListener('load', onLoad)
+const promiseAll = () => {
+  getAllFetch();
+  Promise.all([allTravelers, oneTraveler, allTrips, allDestinations])
+  .then(data => classInstantiation(data))
+}
+
+const classInstantiation = (data) => {
+  let date = todaysDate()
+  const destinationsRepo = new Destinations(data[3].destinations)
+  const travelersRepo = new Travelers(data[0].travelers, date)
+  const traveler = new Traveler(data[0].travelers[currentUserId], date)
+  const tripRepo = data[2].trips
+  destinationsDropList(destinationsRepo.destinations)
+  manageTravelerData(traveler, tripRepo, destinationsRepo)
+}
+
+const manageTravelerData = (traveler, tripRepo, destinationsRepo) => {
+  greetUser(traveler.getUserName())
+  displayYearlySpending(traveler.calculateYearlyTravelCost())
+  traveler.makeAllTrips(tripRepo, destinationsRepo.destinations)
+  displayTrips(traveler)
+}
+
+
+
+submitLoginBtn.addEventListener('click', callOrder)
+// window.addEventListener('load', onLoad)
