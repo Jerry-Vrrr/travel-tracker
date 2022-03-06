@@ -24,7 +24,7 @@ class Traveler {
     })
     return this.allTrips
   }
-
+  
   getUserName() {
   if (!this.name) {
     return 'Hi, Friend! Please Add Your Name To Your User Profile!'

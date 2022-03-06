@@ -1,5 +1,5 @@
 //~~~~~~~~~~~~IMPORTS~~~~~~~~~~~~~~~~~~~
-import {greetUser, displayYearlySpending, displayTrips} from './domUpdates.js';
+import {greetUser, displayYearlySpending, displayTrips, invalidLogin} from './domUpdates.js';
 import './css/styles.css';
 import Destinations from './Destinations';
 import Travelers from './Travelers';
@@ -51,7 +51,7 @@ console.log(destinationsRepo.destinations[0])
   displayTrips(traveler)
   traveler.makeAllTrips(tripRepo, destinationsRepo.destinations)
   console.log(traveler.makeAllTrips(tripRepo, destinationsRepo.destinations)[0])
-  
+
 }
 
 const loginSubmit = () => {
@@ -60,15 +60,16 @@ const loginSubmit = () => {
   // verifyUser()
 }
 
-const verifyUser = (e) => {
-  // const formData = new FormData(e.target);
-  // const userLogin = {
-  // username: formData.get('#username'),
-  // password: formData.get('#password'),
-  // }
-  // console.log(userLogin)
-  // e.target.reset();
-  loginSubmit()
+const verifyUser = () => {
+  let userLogin = username.value.slice(0,8)
+  if (userLogin == 'traveler' && password.value ==  'travel') {
+    loginSubmit()
+  } else {
+    invalidLogin()
+  }
+
+  console.log(password.value)
+
 }
 
 const hide = (section) => {

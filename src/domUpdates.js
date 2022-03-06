@@ -2,8 +2,8 @@
 //~~~~~~~~~~~~QUERY SELECTORS~~~~~~~~~~~~
 const greeting = document.querySelector("#greeting")
 const spending = document.querySelector("#spending")
-const tripCards = document.querySelector('.card-container');
-
+const tripCards = document.querySelector('#cardContainer');
+const loginMessage = document.querySelector('#loginMessage');
 
 const greetUser = (greetings) => {
   // console.log(greeting)
@@ -12,6 +12,11 @@ const greetUser = (greetings) => {
 
 const displayYearlySpending = (total) => {
   spending.innerText = total
+}
+
+const invalidLogin = () => {
+  console.log()
+  loginMessage.innerText = 'Invalid Login and/or Password. Try Again.'
 }
 
 const displayTrips = (currentUser) => {
@@ -42,4 +47,4 @@ const displayTrips = (currentUser) => {
     tripCards.insertAdjacentHTML('beforeend', tripInfo);
   }
 
-export {greetUser, displayYearlySpending, displayTrips}
+export {greetUser, displayYearlySpending, displayTrips, invalidLogin}
