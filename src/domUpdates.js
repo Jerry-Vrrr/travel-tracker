@@ -4,6 +4,7 @@ const greeting = document.querySelector("#greeting")
 const spending = document.querySelector("#spending")
 const tripCards = document.querySelector('#cardContainer');
 const loginMessage = document.querySelector('#loginMessage');
+const loginSection = document.querySelector("#loginSection")
 
 const greetUser = (greetings) => {
   // console.log(greeting)
@@ -21,6 +22,7 @@ const invalidLogin = () => {
 const loginSubmit = () => {
   show(mainPage)
   hide(loginPage)
+  hide(loginSection)
 }
 
 const displayTrips = (traveler) => {
@@ -33,14 +35,14 @@ const displayTrips = (traveler) => {
         tripInfo += `
         <article class="trip-cards">
         <div class="img-wrap">
-        <img class="trip-img" src=${trip.destination.image} alt=${trip.destination.alt}>
+        <img class="trip-img" src=${trip.destination.image} alt=${trip.destination.alt}><hr>
         </div>
-        <h3 class="destination-name">${trip.destination.destination}</h3>
+        <h3 class="destination-name">${trip.destination.destination}</h3><hr>
         <p>Trip date:  <br>
         Travelers: ${trip.travelerCount} <br>
         Duration: ${trip.duration} <br>
         Status: ${trip.status} <br> </p>
-        <a>Request activities from your travel agent!</a>
+        <a>Request activities from your travel agent!</a><hr>
         </article>
         `;
       })
