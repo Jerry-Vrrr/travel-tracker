@@ -1,13 +1,12 @@
-
 //~~~~~~~~~~~~QUERY SELECTORS~~~~~~~~~~~~
 const greeting = document.querySelector("#greeting")
 const spending = document.querySelector("#spending")
 const tripCards = document.querySelector('#cardContainer');
 const loginMessage = document.querySelector('#loginMessage');
 const loginSection = document.querySelector("#loginSection")
+const destinationDropDown = document.querySelector("#destinationDropDown")
 
 const greetUser = (greetings) => {
-  // console.log(greeting)
   greeting.innerText = greetings
 }
 
@@ -26,7 +25,6 @@ const loginSubmit = () => {
 }
 
 const displayTrips = (traveler) => {
-  console.log(traveler)
     tripCards.innerHTML = '';
     let tripInfo = '';
     if (traveler.allTrips.length > 0) {
@@ -54,6 +52,15 @@ const displayTrips = (traveler) => {
     tripCards.insertAdjacentHTML('beforeend', tripInfo);
   }
 
+  const addDestinationsToForm = (destinations) => {
+    const getDestination = destinations.forEach(destination => {
+      const destinationOption = document.createElement('option');
+      destinationOption.innerText = destination.destination;
+      destinationOption.vale = destination.destination;
+      destinationDropDown.appendChild(destinationOption);
+    });
+  };
+
   const hide = (section) => {
     section.classList.toggle('hidden')
   }
@@ -61,4 +68,4 @@ const displayTrips = (traveler) => {
   const show = (section) => {
     section.classList.toggle('hidden')
   }
-export {greetUser, displayYearlySpending, displayTrips, invalidLogin, loginSubmit}
+export {greetUser, displayYearlySpending, displayTrips, invalidLogin, loginSubmit, addDestinationsToForm}

@@ -1,11 +1,11 @@
 //~~~~~~~~~~~~IMPORTS~~~~~~~~~~~~~~~~~~~
-import {greetUser, displayYearlySpending, displayTrips, invalidLogin, loginSubmit} from './domUpdates.js';
+import {greetUser, displayYearlySpending, displayTrips, invalidLogin, loginSubmit, addDestinationsToForm} from './domUpdates.js';
 import './css/styles.css';
 import Destinations from './Destinations';
 import Travelers from './Travelers';
 import Traveler from './Traveler';
 import Trip from './Trip';
-import { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations, destinationsDropList } from './apiCalls.js'
+import { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations,} from './apiCalls.js'
 import './images/airplane-plane-pngrepo-com.png'
 
 //~~~~~~~~~~~~QUERY SELECTORS~~~~~~~~~~~~
@@ -24,7 +24,6 @@ let currentUserId;
 
 const callOrder = () => {
 getUserId()
-
 }
 
 const todaysDate = () => {
@@ -60,7 +59,6 @@ const classInstantiation = (data) => {
   const travelersRepo = new Travelers(data[0].travelers, date)
   const traveler = new Traveler(data[0].travelers[currentUserId], date)
   const tripRepo = data[2].trips
-  destinationsDropList(destinationsRepo.destinations)
   manageTravelerData(traveler, tripRepo, destinationsRepo)
 }
 
@@ -69,6 +67,7 @@ const manageTravelerData = (traveler, tripRepo, destinationsRepo) => {
   displayYearlySpending(traveler.calculateYearlyTravelCost())
   traveler.makeAllTrips(tripRepo, destinationsRepo.destinations)
   displayTrips(traveler)
+  addDestinationsToForm(destinationsRepo.destinations)
 }
 
 

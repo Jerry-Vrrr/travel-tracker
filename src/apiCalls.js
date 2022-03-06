@@ -6,9 +6,9 @@ const getDestinations = 'http://localhost:3001/api/v1/destinations'
 //~~~~~~~~~~~~QUERY SELECTORS~~~~~~~~~~~~
 const startDate = document.querySelector("#startDate")
 const tripDuration = document.querySelector("#tripDuration")
-const destinationDropDown = document.querySelector("#destinationDropDown")
 const numTravelers = document.querySelector("#numTravelers")
 const bookBtn = document.querySelector("#bookBtn")
+
 //~~~~~~~~~~~~GLOBAL VARIABLES~~~~~~~~~~~
 let allTravelers;
 let oneTraveler;
@@ -37,7 +37,6 @@ const postTripRequest = (tripInfo) => {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(tripInfo)
-    // console.log(tripInfo)
   })
   .then(response => {
     return checkErrors(response)
@@ -61,32 +60,25 @@ const checkErrors = (response) => {
   }
 }
 
+const buttonFnc = () => {
+  console.log('banana')
+}
+
 const submitTripRequest = (e) => {
-  e.preventDefault();
-  const formData = new FormData(e.target);
-  const activityLog = {
-    id: parseInt(formData.get('activity-id')),
-    destinationID: parseInt(formData.get('destinationDropDown')),
-    travelers: parseInt(formData.get('numTravelers')),
-    date: formData.get('startDate'),
-    duration: parseInt(formData.get('tripDuration')),
-    status: formData.get('startDate'),
+  // e.preventDefault();
+  console.log('banana')
+  const tripInfo = {
+    id: Date.now(),
+    userID: currentTraveler.id,
+    destinationID: destination.id,
+    travelers: numTravelers.value,
+    date: startDate.value,
+    duration: tripDuration.value,
+    status: trip.status,
   };
   postTripRequest(tripInfo);
   e.target.reset();
-  destinationDropDown()
 }
 
-const destinationsDropList = (destinations) => {
-  let destinationList = destinations.map(destination => destination.destination)
-  // dd1.innerHTML = '';
-  // let loopList = destinationList.forEach(destination => {
-  //   let newOption = document.createElement('option')
-  //   newOption.value = destination.toLowerCase
-  //   dd1.options.add(newOption)
-
-  }
-
-// console.log(destinationDropDown)
-bookBtn.addEventListener('load', submitTripRequest)
-export { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations, destinationsDropList }
+bookBtn.addEventListener('load', buttonFnc)
+export { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations}
