@@ -27,11 +27,11 @@ class Traveler {
 
   getUserName() {
   if (!this.name) {
-    return 'Hi, Friend Please Add Your Name To Your User Profile'
+    return 'Hi, Friend! Please Add Your Name To Your User Profile!'
   }
     let name = this.name
     let firstName = name.split(' ')
-    return firstName[0]
+    return `Welcome, ${firstName[0]}! Ready To Wander?`
   }
 
   calculateYearlyTravelCost() {
@@ -42,13 +42,12 @@ class Traveler {
         return trip;
       }
     });
-
-    const annual = pastYearTrips.reduce((annualSpent, trip) => {
+    const totalCost = pastYearTrips.reduce((annualSpent, trip) => {
       trip.estimatedTripCost();
       annualSpent += trip.tripCost;
       return annualSpent;
     }, 0);
-    return annual;
+    return `You Have Spent $${totalCost} On Travel So Far This Year! Keep Up The Good Work!`;
   }
 
   sortTrips() {
