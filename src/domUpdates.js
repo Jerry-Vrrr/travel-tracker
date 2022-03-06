@@ -19,7 +19,7 @@ const displayTrips = (currentUser) => {
     let tripInfo = '';
     if (currentUser.allTrips.length > 0) {
       currentUser.allTrips.forEach(trip => {
-        const formattedDate = this.formatDate(trip.date);
+        // const formattedDate = this.formatDate(trip.date);
         tripInfo += `
         <article class="trip-cards">
         <div class="img-wrap">
@@ -36,8 +36,8 @@ const displayTrips = (currentUser) => {
       })
     } else {
       tripInfo = `
-        <h3 class="no-trips">You do not have any trips :( <br>
-        Plan one above!</h3>`;
+        <h3 class="no-trips">You have no trips currently booked... <br>
+        Use our nifty booking tool above to change that!</h3>`;
     }
     tripCards.insertAdjacentHTML('beforeend', tripInfo);
   }

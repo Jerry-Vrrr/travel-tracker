@@ -31,7 +31,7 @@ class Traveler {
   }
     let name = this.name
     let firstName = name.split(' ')
-    return firstName[0]
+    return `Welcome, ${firstName[0]}! Ready To Wander?`
   }
 
   calculateYearlyTravelCost() {
