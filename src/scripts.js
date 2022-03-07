@@ -27,13 +27,10 @@ const bookBtn = document.querySelector("#bookBtn")
 //~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~
 let currentUserId;
 let today = new Date().toLocaleDateString("en-US")
+let destinationsRepo;
 
 const callOrder = () => {
 getUserId()
-
-console.log('new date value', today)
-// console.log('new date string', today.toString())
-// console.log('new date today', today.toLocaleDateString("en-US"))
 }
 
 const getUserId = () => {
@@ -58,7 +55,7 @@ const promiseAll = () => {
 }
 
 const classInstantiation = (data) => {
-  const destinationsRepo = new Destinations(data[3].destinations)
+  destinationsRepo = new Destinations(data[3].destinations)
   const travelersRepo = new Travelers(data[0].travelers, today)
   const traveler = new Traveler(data[0].travelers[currentUserId], today)
   const tripRepo = data[2].trips
@@ -71,24 +68,27 @@ const manageTravelerData = (traveler, tripRepo, destinationsRepo) => {
   traveler.makeAllTrips(tripRepo, destinationsRepo.destinations)
   displayTrips(traveler)
   addDestinationsToForm(destinationsRepo.destinations)
-  console.log(traveler.getThisYearsTripCost(today))
+  traveler.sortTrips()
+}
+
+const getDestinationId = (destination) => {
+const destinationID = destinationsRepo.destinations.filter(place => place.destination == destination)
+return destinationID[0].id
 }
 
 const submitTripRequest = () => {
-  console.log('banana')
   const tripInfo = {
     id: Date.now(),
-    userID: currentUserId,
-    destinationID: destinationDropDown.value,
-    travelers: numTravelers.value,
-    date: startDate.value,
-    duration: tripDuration.value,
-    status: 'trip.status',
+    userID: parseInt(currentUserId),
+    destinationID: getDestinationId(destinationDropDown.value),
+    travelers: parseInt(numTravelers.value),
+    date: startDate.value.split("-").join("/"),
+    duration: parseInt(tripDuration.value),
+    status: 'pending',
+    suggestedActivities: []
   };
   postTripRequest(tripInfo);
-  // e.target.reset();
 }
 
 bookBtn.addEventListener('click', submitTripRequest)
 submitLoginBtn.addEventListener('click', callOrder)
-// window.addEventListener('load', onLoad)

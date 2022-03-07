@@ -4,15 +4,17 @@ const getTrips = 'http://localhost:3001/api/v1/trips'
 const getDestinations = 'http://localhost:3001/api/v1/destinations'
 
 //~~~~~~~~~~~~QUERY SELECTORS~~~~~~~~~~~~
+
 const errorTag = document.querySelector('#errorTag')
+
 //~~~~~~~~~~~~GLOBAL VARIABLES~~~~~~~~~~~
+
 let allTravelers;
 let oneTraveler;
 let allTrips;
 let allDestinations;
 
 //~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~
-
 
 const getAllFetch = () => {
   allTravelers = fetch('http://localhost:3001/api/v1/travelers')

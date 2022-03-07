@@ -12,7 +12,7 @@ class Trip {
     this.tripEndDate;
     this.tripCost;
   }
-  
+
   estimatedTripCost() {
       const totalLodging = this.destination.estimatedLodgingCostPerDay * this.duration;
       const totalFlight = this.destination.estimatedFlightCostPerPerson * this.travelerCount;
@@ -27,9 +27,6 @@ class Trip {
       let tripEnd = new Date(this.date)
       this.tripStartDate = tripStart;
       this.tripEndDate = tripEnd;
-      console.log(this.tripStartDate + 1)
-      console.log(this.duration)
-
     }
 
 }

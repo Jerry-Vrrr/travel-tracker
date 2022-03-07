@@ -43,6 +43,10 @@ class Traveler {
     this.sortPastTrips();
     this.sortPendingTrips();
     this.sortUpcomingTrips()
+    console.log('past', this.past)
+    console.log('pres', this.present)
+    console.log('fut', this.upcoming)
+
   }
 
   sortPresentTrips() {
@@ -86,7 +90,7 @@ class Traveler {
 
   getThisYearsTripCost() {
     let date = this.todaysDate
-  console.log(date.split('/')[2] - 2)
+  // console.log(date.split('/')[2] - 2)
   let yearlyTrips = this.allTrips.filter(trip => trip.date.includes(date.split('/')[2] - 2))
   let yearlyCost = yearlyTrips.reduce((annualSpent, trip) => {
     trip.estimatedTripCost();
