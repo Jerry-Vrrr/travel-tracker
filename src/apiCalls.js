@@ -4,11 +4,7 @@ const getTrips = 'http://localhost:3001/api/v1/trips'
 const getDestinations = 'http://localhost:3001/api/v1/destinations'
 
 //~~~~~~~~~~~~QUERY SELECTORS~~~~~~~~~~~~
-const startDate = document.querySelector("#startDate")
-const tripDuration = document.querySelector("#tripDuration")
-const numTravelers = document.querySelector("#numTravelers")
-const bookBtn = document.querySelector("#bookBtn")
-
+const errorTag = document.querySelector('#errorTag')
 //~~~~~~~~~~~~GLOBAL VARIABLES~~~~~~~~~~~
 let allTravelers;
 let oneTraveler;
@@ -33,6 +29,7 @@ const getAllFetch = () => {
 }
 
 const postTripRequest = (tripInfo) => {
+  console.log(tripInfo)
   fetch('http://localhost:3001/api/v1/trips', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -60,25 +57,5 @@ const checkErrors = (response) => {
   }
 }
 
-const buttonFnc = () => {
-  console.log('banana')
-}
 
-const submitTripRequest = (e) => {
-  // e.preventDefault();
-  console.log('banana')
-  const tripInfo = {
-    id: Date.now(),
-    userID: currentTraveler.id,
-    destinationID: destination.id,
-    travelers: numTravelers.value,
-    date: startDate.value,
-    duration: tripDuration.value,
-    status: trip.status,
-  };
-  postTripRequest(tripInfo);
-  e.target.reset();
-}
-
-bookBtn.addEventListener('load', buttonFnc)
-export { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations}
+export { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations, postTripRequest}

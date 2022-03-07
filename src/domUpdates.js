@@ -68,4 +68,4 @@ const displayTrips = (traveler) => {
   const show = (section) => {
     section.classList.toggle('hidden')
   }
-export {greetUser, displayYearlySpending, displayTrips, invalidLogin, loginSubmit, addDestinationsToForm}
+export {greetUser, displayYearlySpending, displayTrips, invalidLogin, loginSubmit, addDestinationsToForm, destinationDropDown}

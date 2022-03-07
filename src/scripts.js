@@ -1,11 +1,11 @@
 //~~~~~~~~~~~~IMPORTS~~~~~~~~~~~~~~~~~~~
-import {greetUser, displayYearlySpending, displayTrips, invalidLogin, loginSubmit, addDestinationsToForm} from './domUpdates.js';
+import {greetUser, displayYearlySpending, displayTrips, invalidLogin, loginSubmit, addDestinationsToForm, destinationDropDown} from './domUpdates.js';
 import './css/styles.css';
 import Destinations from './Destinations';
 import Travelers from './Travelers';
 import Traveler from './Traveler';
 import Trip from './Trip';
-import { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations,} from './apiCalls.js'
+import { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations, postTripRequest} from './apiCalls.js'
 import './images/airplane-plane-pngrepo-com.png'
 
 //~~~~~~~~~~~~QUERY SELECTORS~~~~~~~~~~~~
@@ -19,6 +19,11 @@ const loginPage = document.querySelector("#loginPage")
 const mainPage = document.querySelector("#mainPage")
 const username = document.querySelector("#username")
 const password = document.querySelector("#password")
+const startDate = document.querySelector("#startDate")
+const tripDuration = document.querySelector("#tripDuration")
+const numTravelers = document.querySelector("#numTravelers")
+const bookBtn = document.querySelector("#bookBtn")
+
 //~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~
 let currentUserId;
 
@@ -70,7 +75,21 @@ const manageTravelerData = (traveler, tripRepo, destinationsRepo) => {
   addDestinationsToForm(destinationsRepo.destinations)
 }
 
+const submitTripRequest = () => {
+  console.log('banana')
+  const tripInfo = {
+    id: Date.now(),
+    userID: currentUserId,
+    destinationID: destinationDropDown.value,
+    travelers: numTravelers.value,
+    date: startDate.value,
+    duration: tripDuration.value,
+    status: 'trip.status',
+  };
+  postTripRequest(tripInfo);
+  // e.target.reset();
+}
 
-
+bookBtn.addEventListener('click', submitTripRequest)
 submitLoginBtn.addEventListener('click', callOrder)
 // window.addEventListener('load', onLoad)
