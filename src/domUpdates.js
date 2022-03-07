@@ -10,8 +10,8 @@ const greetUser = (greetings) => {
   greeting.innerText = greetings
 }
 
-const displayYearlySpending = (total) => {
-  spending.innerText = total
+const displayYearlySpending = (traveler) => {
+  spending.innerText = traveler.getThisYearsTripCost()
 }
 
 const invalidLogin = () => {
