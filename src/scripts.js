@@ -27,7 +27,7 @@ const bookBtn = document.querySelector("#bookBtn")
 //~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~
 
 let currentUserId;
-let today = new Date().toLocaleDateString("en-US")
+let today = new Date().getTime()
 let destinationsRepo;
 
 const callOrder = () => {
@@ -35,7 +35,7 @@ getUserId()
 }
 
 const getUserId = () => {
-  currentUserId = username.value.slice(8)
+  currentUserId = username.value.slice(8) - 1
   verifyUser()
   promiseAll()
 }
@@ -65,10 +65,10 @@ const classInstantiation = (data) => {
 
 const manageTravelerData = (traveler, tripRepo, destinationsRepo) => {
   greetUser(traveler.getUserName())
-  displayYearlySpending(traveler.getThisYearsTripCost())
   traveler.makeAllTrips(tripRepo, destinationsRepo.destinations)
   displayTrips(traveler)
   addDestinationsToForm(destinationsRepo.destinations)
+  displayYearlySpending(traveler)
   traveler.sortTrips()
 }
 

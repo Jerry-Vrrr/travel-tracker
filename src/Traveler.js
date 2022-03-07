@@ -36,8 +36,6 @@ class Traveler {
     return `Welcome, ${firstName[0]}! Ready To Wander?`
   }
 
-
-
   sortTrips() {
     this.sortPresentTrips();
     this.sortPastTrips();
@@ -46,13 +44,13 @@ class Traveler {
     console.log('past', this.past)
     console.log('pres', this.present)
     console.log('fut', this.upcoming)
-
+    console.log('pen', this.pending)
   }
 
   sortPresentTrips() {
     this.allTrips.forEach(trip => {
       let today = this.todaysDate
-      let tripDate = trip.date.split('/').join("")
+      let tripDate = new Date(`${trip.date}`).getTime()
       if (tripDate == today && !this.present.includes(trip)) {
         this.present.push(trip);
       }
@@ -61,8 +59,9 @@ class Traveler {
 
   sortUpcomingTrips() {
     this.allTrips.forEach(trip => {
-      let tripDate = trip.date.split('/').join("")
+      let tripDate = new Date(`${trip.date}`).getTime()
       let today = this.todaysDate
+      console.log(today)
       if (tripDate < today && !this.past.includes(trip)) {
         this.past.push(trip);
       }
@@ -72,7 +71,7 @@ class Traveler {
   sortPastTrips() {
     this.allTrips.forEach(trip => {
       let today = this.todaysDate
-      let tripDate = trip.date.split('/').join("")
+      let tripDate = new Date(`${trip.date}`).getTime()
       if (tripDate > today && !this.upcoming.includes(trip)) {
         this.upcoming.push(trip);
       }
@@ -89,16 +88,15 @@ class Traveler {
   }
 
   getThisYearsTripCost() {
-    let date = this.todaysDate
-  // console.log(date.split('/')[2] - 2)
-  let yearlyTrips = this.allTrips.filter(trip => trip.date.includes(date.split('/')[2] - 2))
-  let yearlyCost = yearlyTrips.reduce((annualSpent, trip) => {
+  let date = new Date().toLocaleDateString("en-US").split("/")
+  let yearlyTrips = this.allTrips.filter(trip => trip.date.includes(date[2]))
+  let yearlyCost = yearlyTrips.reduce((acc, trip) => {
     trip.estimatedTripCost();
-    annualSpent += trip.tripCost;
-    return annualSpent;
+    acc += trip.tripCost;
+    return acc;
   }, 0);
-  return `You Have Spent $${yearlyCost} On Travel So Far This Year! Keep Up The Good Work!`;
-}
+  return `You Have Spent $${yearlyCost} On Travel So Far This Year!`;
+  }
 }
 
 export default Traveler;

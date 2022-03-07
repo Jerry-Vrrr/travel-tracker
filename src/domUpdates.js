@@ -10,8 +10,8 @@ const greetUser = (greetings) => {
   greeting.innerText = greetings
 }
 
-const displayYearlySpending = (total) => {
-  spending.innerText = total
+const displayYearlySpending = (traveler) => {
+  spending.innerText = traveler.getThisYearsTripCost()
 }
 
 const invalidLogin = () => {
@@ -29,14 +29,13 @@ const displayTrips = (traveler) => {
     let tripInfo = '';
     if (traveler.allTrips.length > 0) {
       traveler.allTrips.forEach(trip => {
-        // const formattedDate = this.formatDate(trip.date);
         tripInfo += `
         <article class="trip-cards">
         <div class="img-wrap">
         <img class="trip-img" src=${trip.destination.image} alt=${trip.destination.alt}><hr>
         </div>
         <h3 class="destination-name">${trip.destination.destination}</h3><hr>
-        <p>Trip date:  <br>
+        <p>Trip date: ${trip.date} <br>
         Travelers: ${trip.travelerCount} <br>
         Duration: ${trip.duration} <br>
         Status: ${trip.status} <br> </p>
