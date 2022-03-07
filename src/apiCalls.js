@@ -4,11 +4,7 @@ const getTrips = 'http://localhost:3001/api/v1/trips'
 const getDestinations = 'http://localhost:3001/api/v1/destinations'
 
 //~~~~~~~~~~~~QUERY SELECTORS~~~~~~~~~~~~
-const startDate = document.querySelector("#startDate")
-const tripDuration = document.querySelector("#tripDuration")
-const destinationDropDown = document.querySelector("#destinationDropDown")
-const numTravelers = document.querySelector("#numTravelers")
-const bookBtn = document.querySelector("#bookBtn")
+const errorTag = document.querySelector('#errorTag')
 //~~~~~~~~~~~~GLOBAL VARIABLES~~~~~~~~~~~
 let allTravelers;
 let oneTraveler;
@@ -33,11 +29,11 @@ const getAllFetch = () => {
 }
 
 const postTripRequest = (tripInfo) => {
+  console.log(tripInfo)
   fetch('http://localhost:3001/api/v1/trips', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(tripInfo)
-    // console.log(tripInfo)
   })
   .then(response => {
     return checkErrors(response)
@@ -61,32 +57,5 @@ const checkErrors = (response) => {
   }
 }
 
-const submitTripRequest = (e) => {
-  e.preventDefault();
-  const formData = new FormData(e.target);
-  const activityLog = {
-    id: parseInt(formData.get('activity-id')),
-    destinationID: parseInt(formData.get('destinationDropDown')),
-    travelers: parseInt(formData.get('numTravelers')),
-    date: formData.get('startDate'),
-    duration: parseInt(formData.get('tripDuration')),
-    status: formData.get('startDate'),
-  };
-  postTripRequest(tripInfo);
-  e.target.reset();
-  destinationDropDown()
-}
 
-const destinationsDropList = (destinations) => {
-  let destinationList = destinations.map(destination => destination.destination)
-  // dd1.innerHTML = '';
-  // let loopList = destinationList.forEach(destination => {
-  //   let newOption = document.createElement('option')
-  //   newOption.value = destination.toLowerCase
-  //   dd1.options.add(newOption)
-
-  }
-
-// console.log(destinationDropDown)
-bookBtn.addEventListener('load', submitTripRequest)
-export { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations, destinationsDropList }
+export { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations, postTripRequest}

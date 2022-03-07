@@ -41,23 +41,22 @@
           <h3>BOOKING</h3>
           <div class="booking">
             <label for="start">Start date:
-              <input required type="date" id="startDate" name="trip-start"
-              min="2000-01-01" max="2035-12-31">
+              <input required type="date" id="startDate" name="trip-start" min="2000-01-01" max="2035-12-31" required>
             </label>
             <label  for="trip-duration">Duration (days):
-              <input required class="trip-duration" id="tripDuration" type="number" min="1">
+              <input required class="trip-duration" id="tripDuration" type="number" min="1" required>
             </label>
             <label for="num-travelers">Number of travelers:
-              <input required class="num-travelers" type="number" id="numTravelers" min="1">
+              <input required class="num-travelers" type="number" id="numTravelers" min="1" required>
             </label>
             <label for="drop">Choose a destination:
-              <select required class="drop" id="destinationDropDown">
+              <select class="drop" id="destinationDropDown" required>
                 <option value="0">destination</option>
               </select>
             </label>
           </div>
-          <h4 class="selection-err hidden"></h4>
-          <button class="book-btn small-btn" id="bookBtn" >button 1</button>
+          <h4 class="selection-err"id="errorTag"></h4>
+          <button class="book-btn" id="bookBtn">Request Trip</button>
         </section>
         <section class="trips">
           <div class="tabs">
