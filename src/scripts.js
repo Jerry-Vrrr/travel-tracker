@@ -26,15 +26,14 @@ const bookBtn = document.querySelector("#bookBtn")
 
 //~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~
 let currentUserId;
+let today = new Date().toLocaleDateString("en-US")
 
 const callOrder = () => {
 getUserId()
-}
 
-const todaysDate = () => {
-const today = new Date();
-const date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
-return date
+console.log('new date value', today)
+// console.log('new date string', today.toString())
+// console.log('new date today', today.toLocaleDateString("en-US"))
 }
 
 const getUserId = () => {
@@ -59,20 +58,20 @@ const promiseAll = () => {
 }
 
 const classInstantiation = (data) => {
-  let date = todaysDate()
   const destinationsRepo = new Destinations(data[3].destinations)
-  const travelersRepo = new Travelers(data[0].travelers, date)
-  const traveler = new Traveler(data[0].travelers[currentUserId], date)
+  const travelersRepo = new Travelers(data[0].travelers, today)
+  const traveler = new Traveler(data[0].travelers[currentUserId], today)
   const tripRepo = data[2].trips
   manageTravelerData(traveler, tripRepo, destinationsRepo)
 }
 
 const manageTravelerData = (traveler, tripRepo, destinationsRepo) => {
   greetUser(traveler.getUserName())
-  displayYearlySpending(traveler.calculateYearlyTravelCost())
+  displayYearlySpending(traveler.getThisYearsTripCost())
   traveler.makeAllTrips(tripRepo, destinationsRepo.destinations)
   displayTrips(traveler)
   addDestinationsToForm(destinationsRepo.destinations)
+  console.log(traveler.getThisYearsTripCost(today))
 }
 
 const submitTripRequest = () => {

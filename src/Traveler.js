@@ -36,30 +36,13 @@ class Traveler {
     return `Welcome, ${firstName[0]}! Ready To Wander?`
   }
 
-  calculateYearlyTravelCost() {
-    let pastYearTrips = this.allTrips.filter(trip => {
-      trip.findTripDuration();
-      let yearStart = (this.todaysDate).setDate(new Date(this.todaysDate).getDate() - 365);
-      if (trip.tripStartDate > yearStart) {
-        return trip;
-      }
-    });
-    const totalCost = pastYearTrips.reduce((annualSpent, trip) => {
-      trip.estimatedTripCost();
-      annualSpent += trip.tripCost;
-      return annualSpent;
-    }, 0);
-    return `You Have Spent $${totalCost} On Travel So Far This Year! Keep Up The Good Work!`;
-  }
+
 
   sortTrips() {
     this.sortPresentTrips();
     this.sortPastTrips();
     this.sortPendingTrips();
     this.sortUpcomingTrips()
-    // console.log('past', this.past)
-    // console.log('present', this.present)
-    // console.log('future', this.upcoming)
   }
 
   sortPresentTrips() {
@@ -101,6 +84,17 @@ class Traveler {
     })
   }
 
+  getThisYearsTripCost() {
+    let date = this.todaysDate
+  console.log(date.split('/')[2] - 2)
+  let yearlyTrips = this.allTrips.filter(trip => trip.date.includes(date.split('/')[2] - 2))
+  let yearlyCost = yearlyTrips.reduce((annualSpent, trip) => {
+    trip.estimatedTripCost();
+    annualSpent += trip.tripCost;
+    return annualSpent;
+  }, 0);
+  return `You Have Spent $${yearlyCost} On Travel So Far This Year! Keep Up The Good Work!`;
+}
 }
 
 export default Traveler;
