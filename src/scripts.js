@@ -1,5 +1,5 @@
 //~~~~~~~~~~~~IMPORTS~~~~~~~~~~~~~~~~~~~
-import {greetUser, displayYearlySpending, displayTrips, invalidLogin, loginSubmit, addDestinationsToForm, destinationDropDown} from './domUpdates.js';
+import {greetUser, displayYearlySpending, displayTrips, invalidLogin, loginSubmit, addDestinationsToForm} from './domUpdates.js';
 import './css/styles.css';
 import Destinations from './Destinations';
 import Travelers from './Travelers';
@@ -25,6 +25,7 @@ const numTravelers = document.querySelector("#numTravelers")
 const bookBtn = document.querySelector("#bookBtn")
 
 //~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~
+
 let currentUserId;
 let today = new Date().toLocaleDateString("en-US")
 let destinationsRepo;
@@ -90,5 +91,13 @@ const submitTripRequest = () => {
   postTripRequest(tripInfo);
 }
 
+const resetInputs = () => {
+  startDate.value = ''
+  tripDuration.value = ''
+  numTravelers.value = ''
+  destinationDropDown.value = ''
+}
+
 bookBtn.addEventListener('click', submitTripRequest)
 submitLoginBtn.addEventListener('click', callOrder)
+export {resetInputs}

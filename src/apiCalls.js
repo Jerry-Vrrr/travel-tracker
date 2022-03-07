@@ -1,3 +1,5 @@
+import {resetInputs} from './scripts.js';
+
 const getTravelers = 'http://localhost:3001/api/v1/travelers'
 const getSingleTraveler = 'http://localhost:3001/api/v1/travelers/10'
 const getTrips = 'http://localhost:3001/api/v1/trips'
@@ -38,6 +40,7 @@ const postTripRequest = (tripInfo) => {
     body: JSON.stringify(tripInfo)
   })
   .then(response => {
+    resetInputs()
     return checkErrors(response)
   })
   .catch((error) => displayError(error))
