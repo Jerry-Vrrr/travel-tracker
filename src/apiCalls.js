@@ -1,18 +1,22 @@
+import {resetInputs} from './scripts.js';
+
 const getTravelers = 'http://localhost:3001/api/v1/travelers'
 const getSingleTraveler = 'http://localhost:3001/api/v1/travelers/10'
 const getTrips = 'http://localhost:3001/api/v1/trips'
 const getDestinations = 'http://localhost:3001/api/v1/destinations'
 
 //~~~~~~~~~~~~QUERY SELECTORS~~~~~~~~~~~~
+
 const errorTag = document.querySelector('#errorTag')
+
 //~~~~~~~~~~~~GLOBAL VARIABLES~~~~~~~~~~~
+
 let allTravelers;
 let oneTraveler;
 let allTrips;
 let allDestinations;
 
 //~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~
-
 
 const getAllFetch = () => {
   allTravelers = fetch('http://localhost:3001/api/v1/travelers')
@@ -36,6 +40,7 @@ const postTripRequest = (tripInfo) => {
     body: JSON.stringify(tripInfo)
   })
   .then(response => {
+    resetInputs()
     return checkErrors(response)
   })
   .catch((error) => displayError(error))

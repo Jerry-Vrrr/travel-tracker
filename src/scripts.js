@@ -1,5 +1,5 @@
 //~~~~~~~~~~~~IMPORTS~~~~~~~~~~~~~~~~~~~
-import {greetUser, displayYearlySpending, displayTrips, invalidLogin, loginSubmit, addDestinationsToForm, destinationDropDown} from './domUpdates.js';
+import {greetUser, displayYearlySpending, displayTrips, invalidLogin, loginSubmit, addDestinationsToForm} from './domUpdates.js';
 import './css/styles.css';
 import Destinations from './Destinations';
 import Travelers from './Travelers';
@@ -25,16 +25,13 @@ const numTravelers = document.querySelector("#numTravelers")
 const bookBtn = document.querySelector("#bookBtn")
 
 //~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~
+
 let currentUserId;
+let today = new Date().toLocaleDateString("en-US")
+let destinationsRepo;
 
 const callOrder = () => {
 getUserId()
-}
-
-const todaysDate = () => {
-const today = new Date();
-const date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
-return date
 }
 
 const getUserId = () => {
@@ -59,37 +56,48 @@ const promiseAll = () => {
 }
 
 const classInstantiation = (data) => {
-  let date = todaysDate()
-  const destinationsRepo = new Destinations(data[3].destinations)
-  const travelersRepo = new Travelers(data[0].travelers, date)
-  const traveler = new Traveler(data[0].travelers[currentUserId], date)
+  destinationsRepo = new Destinations(data[3].destinations)
+  const travelersRepo = new Travelers(data[0].travelers, today)
+  const traveler = new Traveler(data[0].travelers[currentUserId], today)
   const tripRepo = data[2].trips
   manageTravelerData(traveler, tripRepo, destinationsRepo)
 }
 
 const manageTravelerData = (traveler, tripRepo, destinationsRepo) => {
   greetUser(traveler.getUserName())
-  displayYearlySpending(traveler.calculateYearlyTravelCost())
+  displayYearlySpending(traveler.getThisYearsTripCost())
   traveler.makeAllTrips(tripRepo, destinationsRepo.destinations)
   displayTrips(traveler)
   addDestinationsToForm(destinationsRepo.destinations)
+  traveler.sortTrips()
+}
+
+const getDestinationId = (destination) => {
+const destinationID = destinationsRepo.destinations.filter(place => place.destination == destination)
+return destinationID[0].id
 }
 
 const submitTripRequest = () => {
-  console.log('banana')
   const tripInfo = {
     id: Date.now(),
-    userID: currentUserId,
-    destinationID: destinationDropDown.value,
-    travelers: numTravelers.value,
-    date: startDate.value,
-    duration: tripDuration.value,
-    status: 'trip.status',
+    userID: parseInt(currentUserId),
+    destinationID: getDestinationId(destinationDropDown.value),
+    travelers: parseInt(numTravelers.value),
+    date: startDate.value.split("-").join("/"),
+    duration: parseInt(tripDuration.value),
+    status: 'pending',
+    suggestedActivities: []
   };
   postTripRequest(tripInfo);
-  // e.target.reset();
+}
+
+const resetInputs = () => {
+  startDate.value = ''
+  tripDuration.value = ''
+  numTravelers.value = ''
+  destinationDropDown.value = ''
 }
 
 bookBtn.addEventListener('click', submitTripRequest)
 submitLoginBtn.addEventListener('click', callOrder)
-// window.addEventListener('load', onLoad)
+export {resetInputs}
