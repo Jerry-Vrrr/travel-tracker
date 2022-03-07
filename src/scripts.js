@@ -27,7 +27,7 @@ const bookBtn = document.querySelector("#bookBtn")
 //~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~
 
 let currentUserId;
-let today = new Date().toLocaleDateString("en-US")
+let today = new Date().getTime()
 let destinationsRepo;
 
 const callOrder = () => {
