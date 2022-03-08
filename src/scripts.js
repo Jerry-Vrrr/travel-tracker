@@ -30,10 +30,6 @@ let today = new Date().getTime();
 let destinationsRepo;
 let traveler;
 
-const callOrder = () => {
-getUserId()
-}
-
 const getUserId = () => {
   currentUserId = username.value.slice(8) - 1
   verifyUser()
@@ -88,7 +84,9 @@ const submitTripRequest = () => {
     status: 'pending',
     suggestedActivities: []
   };
-  postTripRequest(tripInfo);
+  postTripRequest(tripInfo).then((data) => {
+    resetInputs()
+  })
 }
 
 const resetInputs = () => {
@@ -96,28 +94,23 @@ const resetInputs = () => {
   tripDuration.value = ''
   numTravelers.value = ''
   destinationDropDown.value = ''
-  displayAllTrips(traveler)
+  displayPendingTrips(traveler)
 }
 
-function logoutUser() {
-  console.log('logout')
+const logoutUser = () => {
   location.reload()
 }
 
 const sendAllTrips = () => {
-  console.log('all')
   displayAllTrips(traveler)
 }
 const sendUpcomingTrips = () => {
-  console.log('upcoming')
   displayUpcomingTrips(traveler)
 }
 const sendPastTrips = () => {
-  console.log('past')
   displayPastTrips(traveler)
 }
 const sendPendingTrips = () => {
-  console.log('pending')
   displayPendingTrips(traveler)
 }
 
@@ -126,6 +119,6 @@ allTrp.addEventListener('click', sendAllTrips)
 pastTrp.addEventListener('click', sendPastTrips)
 pendingTrp.addEventListener('click', sendPendingTrips)
 bookBtn.addEventListener('click', submitTripRequest)
-submitLoginBtn.addEventListener('click', callOrder)
+submitLoginBtn.addEventListener('click', getUserId)
 logoutBtn.addEventListener('click', logoutUser)
-export {resetInputs}
+export {resetInputs, promiseAll}

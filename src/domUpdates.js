@@ -35,7 +35,6 @@ const invalidLogin = () => {
 
 const loginSubmit = () => {
   show(mainPage)
-  hide(loginPage)
   hide(loginSection)
 }
 
@@ -46,6 +45,7 @@ const displayAllTrips = (traveler) => {
       traveler.allTrips.forEach(trip => {
         tripInfo += `
         <article class="trip-cards">
+        <h2 class="filtered-trips">All Trips</h2>
         <div class="img-wrap">
         <img class="trip-img" src=${trip.destination.image} alt=${trip.destination.alt}><hr>
         </div>
@@ -73,6 +73,7 @@ const displayAllTrips = (traveler) => {
         traveler.upcoming.forEach(trip => {
           tripInfo += `
           <article class="trip-cards">
+          <h2 class="filtered-trips">Upcoming Trips</h2>
           <div class="img-wrap">
           <img class="trip-img" src=${trip.destination.image} alt=${trip.destination.alt}><hr>
           </div>
@@ -100,6 +101,7 @@ const displayAllTrips = (traveler) => {
           traveler.past.forEach(trip => {
             tripInfo += `
             <article class="trip-cards">
+            <h2 class="filtered-trips">Past Trips</h2>
             <div class="img-wrap">
             <img class="trip-img" src=${trip.destination.image} alt=${trip.destination.alt}><hr>
             </div>
@@ -127,6 +129,7 @@ const displayAllTrips = (traveler) => {
             traveler.pending.forEach(trip => {
               tripInfo += `
               <article class="trip-cards">
+              <h2 class="filtered-trips">Pending Trips</h2>
               <div class="img-wrap">
               <img class="trip-img" src=${trip.destination.image} alt=${trip.destination.alt}><hr>
               </div>
@@ -141,8 +144,7 @@ const displayAllTrips = (traveler) => {
             })
           } else {
             tripInfo = `
-              <h3 class="no-trips">You have no trips currently booked... <br>
-              Use our nifty booking tool above to change that!</h3>`;
+              <h3 class="no-trips">You have no pending trips.</h3>`;
           }
           tripCards.insertAdjacentHTML('beforeend', tripInfo);
         }

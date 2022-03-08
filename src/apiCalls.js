@@ -1,4 +1,4 @@
-import {resetInputs} from './scripts.js';
+import {resetInputs, promiseAll} from './scripts.js';
 import {displayError, displaySuccess} from './domUpdates.js';
 
 //~~~~~~~~~~~~QUERY SELECTORS~~~~~~~~~~~~
@@ -6,7 +6,6 @@ import {displayError, displaySuccess} from './domUpdates.js';
 const errorTag = document.querySelector('#errorTag')
 
 //~~~~~~~~~~~~GLOBAL VARIABLES~~~~~~~~~~~
-
 let allTravelers;
 let oneTraveler;
 let allTrips;
@@ -29,13 +28,12 @@ const getAllFetch = () => {
 }
 
 const postTripRequest = (tripInfo) => {
-  fetch('http://localhost:3001/api/v1/trips', {
+  return fetch('http://localhost:3001/api/v1/trips', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(tripInfo)
   })
   .then(response => {
-    resetInputs()
     displaySuccess()
     return checkErrors(response)
   })
