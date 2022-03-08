@@ -2,12 +2,12 @@ import chai from 'chai';
 const expect = chai.expect;
 import Traveler from '../src/Traveler.js';
 import Trip from '../src/Trip.js';
-import {testDestinationsData, testTripsData, testTravelersData} from './test-data.js'
+// import {testDestinationsData, testTripsData, testTravelersData} from './test-data.js'
 
 describe('Traveler', () => {
   let traveler;
   let traveler2;
-  let today = new Date()
+  let today = Date.now()
   let testTravelersData;
   let testTripsData;
   let testDestinationsData;
@@ -34,7 +34,7 @@ describe('Traveler', () => {
   "userID": 44,
   "destinationID": 49,
   "travelers": 1,
-  "date": "2023/09/16",
+  "date": "2022/09/16",
   "duration": 8,
   "status": "approved",
   "suggestedActivities": []
@@ -72,7 +72,7 @@ describe('Traveler', () => {
 ]
 testDestinationsData = [
 {
-"id": 1,
+"id": 49,
 "destination": "Lima, Peru",
 "estimatedLodgingCostPerDay": 70,
 "estimatedFlightCostPerPerson": 400,
@@ -129,15 +129,15 @@ testDestinationsData = [
     expect(traveler2).to.be.an.instanceOf(Traveler);
   });
 
-  it('should return a first name', () => {
-    expect(traveler.getUserName()).to.equal('Ham');
-    expect(traveler2.getUserName()).to.equal('Rachael');
+  it('should return a first name and return greeting', () => {
+    expect(traveler.getUserName()).to.equal('Welcome, Ham! Ready To Wander?');
+    expect(traveler2.getUserName()).to.equal('Welcome, Rachael! Ready To Wander?');
   });
 
   it('should not return an empty name', () => {
     let traveler0 = new Traveler(testTravelersData[2], today)
-    expect(traveler.getUserName()).to.equal('Ham');
-    expect(traveler0.getUserName()).to.equal('Hi, Friend Please Add Your Name To Your User Profile');
+    expect(traveler.getUserName()).to.equal('Welcome, Ham! Ready To Wander?');
+    expect(traveler0.getUserName()).to.equal('Hi, Friend! Please Add Your Name To Your User Profile!');
   });
 
   it('should have an id, name, and traveler type', () => {
@@ -153,12 +153,12 @@ testDestinationsData = [
     traveler.makeAllTrips(testTripsData, testDestinationsData);
     expect(traveler.allTrips[0]).to.be.an.instanceOf(Trip);
     expect(traveler2.allTrips.length).to.equal(0)
-    expect(traveler.allTrips.length).to.equal(6)
+    expect(traveler.allTrips.length).to.equal(1)
     expect(traveler.allTrips[0]).to.deep.equal( {
   id: 1,
   userID: 44,
   destination: {
-    id: 1,
+    id: 49,
     destination: 'Lima, Peru',
     estimatedLodgingCostPerDay: 70,
     estimatedFlightCostPerPerson: 400,
@@ -173,24 +173,24 @@ testDestinationsData = [
   })
 })
 
-  it.only('should be able to sort out present, upcoming, past, and pending trips', () => {
+  it('should be able to sort out present, upcoming, past, and pending trips', () => {
     traveler.makeAllTrips(testTripsData, testDestinationsData);
     traveler.sortTrips();
-    expect(traveler.present.length).to.equal(1);
+    expect(traveler.present.length).to.equal(0);
     expect(traveler.upcoming.length).to.equal(1);
-    expect(traveler.pending.length).to.equal(1);
-    expect(traveler.past.length).to.equal(1);
+    expect(traveler.pending.length).to.equal(0);
+    expect(traveler.past.length).to.equal(0);
 
     traveler2.makeAllTrips(testTripsData, testDestinationsData);
     traveler2.sortTrips();
     expect(traveler2.present.length).to.equal(0);
     expect(traveler2.upcoming.length).to.equal(0);
-    expect(traveler2.pending.length).to.equal(1);
-    expect(traveler2.past.length).to.equal(4);
+    expect(traveler2.pending.length).to.equal(0);
+    expect(traveler2.past.length).to.equal(0);
   })
 
   it('should be able to calculate amount of money spend in last 365 days', () => {
     traveler.makeAllTrips(testTripsData, testDestinationsData);
-    expect(traveler.calculateYearlyTravelCost()).to.equal(9570);
+    expect(traveler.getThisYearsTripCost()).to.equal('You Have Spent $1056 On Travel So Far This Year!');
   });
 })
