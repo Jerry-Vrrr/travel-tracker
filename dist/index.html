@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,7 +33,7 @@
             <h2></h2>
           </div>
           <div class="right">
-            <button class="logout small-btn">Log Out</button>
+            <button class="logout small-btn" id="logoutBtn" >Log Out</button>
             <h2 id="spending">Total Spent this year: $$</h2>
           </div>
         </header>
@@ -60,17 +60,15 @@
         </section>
         <section class="trips">
           <div class="tabs">
-            <button class="trip-btns" id="upcomingTrp">button 2</button>
-            <button class="trip-btns" id="presentTrp">button 3</button>
-            <button class="trip-btns" id="pendingTrp">button 4</button>
-            <button class="trip-btns" id="pastTrp">button 5</button>
+            <button class="trip-btns" id="upcomingTrp">Upcoming Trips</button>
+            <button class="trip-btns" id="allTrp">All Trips</button>
+            <button class="trip-btns" id="pendingTrp">Pending Trips</button>
+            <button class="trip-btns" id="pastTrp">Past Trips</button>
           </div>
           <h2 id="trip-type-section"></h2>
           <div class="card-container" id='cardContainer'>
         </section>
     </div>
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
-
 </body>
 </html>
