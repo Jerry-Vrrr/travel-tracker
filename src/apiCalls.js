@@ -1,9 +1,5 @@
 import {resetInputs} from './scripts.js';
-
-const getTravelers = 'http://localhost:3001/api/v1/travelers'
-const getSingleTraveler = 'http://localhost:3001/api/v1/travelers/10'
-const getTrips = 'http://localhost:3001/api/v1/trips'
-const getDestinations = 'http://localhost:3001/api/v1/destinations'
+import {displayError, displaySuccess} from './domUpdates.js';
 
 //~~~~~~~~~~~~QUERY SELECTORS~~~~~~~~~~~~
 
@@ -33,7 +29,6 @@ const getAllFetch = () => {
 }
 
 const postTripRequest = (tripInfo) => {
-  console.log(tripInfo)
   fetch('http://localhost:3001/api/v1/trips', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -41,18 +36,13 @@ const postTripRequest = (tripInfo) => {
   })
   .then(response => {
     resetInputs()
+    displaySuccess()
     return checkErrors(response)
   })
   .catch((error) => displayError(error))
 }
 
-const displayError = (error) => {
-  if (error.message === "Failed to fetch!") {
-    errorTag.innerText = "OPPS, SORRY! Something went wrong!";
-  } else {
-    errorTag.innerText = error.message;
-  }
-}
+
 
 const checkErrors = (response) => {
   if (!response.ok) {
@@ -62,5 +52,4 @@ const checkErrors = (response) => {
   }
 }
 
-
-export { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations, postTripRequest}
+export {getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations, postTripRequest}

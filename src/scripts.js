@@ -1,22 +1,21 @@
 //~~~~~~~~~~~~IMPORTS~~~~~~~~~~~~~~~~~~~
-import {greetUser, displayYearlySpending, displayTrips, invalidLogin, loginSubmit, addDestinationsToForm} from './domUpdates.js';
+import {greetUser, displayYearlySpending, displayAllTrips, displayUpcomingTrips,
+  displayPastTrips, displayPendingTrips, invalidLogin, loginSubmit, addDestinationsToForm} from './domUpdates.js';
 import './css/styles.css';
 import Destinations from './Destinations';
 import Travelers from './Travelers';
 import Traveler from './Traveler';
-import Trip from './Trip';
 import { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations, postTripRequest} from './apiCalls.js'
 import './images/airplane-plane-pngrepo-com.png'
 
 //~~~~~~~~~~~~QUERY SELECTORS~~~~~~~~~~~~
 
 const upcomingTrp = document.querySelector("#upcomingTrp")
-const presentTrp = document.querySelector("#presentTrp")
-const pendingTrp = document.querySelector("#destinationDropDown")
-const pastTrp = document.querySelector("#numTravelers")
+const allTrp = document.querySelector("#allTrp")
+const pendingTrp = document.querySelector("#pendingTrp")
+const pastTrp = document.querySelector("#pastTrp")
 const submitLoginBtn = document.querySelector("#submitLoginBtn")
-const loginPage = document.querySelector("#loginPage")
-const mainPage = document.querySelector("#mainPage")
+const logoutBtn = document.querySelector("#logoutBtn")
 const username = document.querySelector("#username")
 const password = document.querySelector("#password")
 const startDate = document.querySelector("#startDate")
@@ -27,8 +26,9 @@ const bookBtn = document.querySelector("#bookBtn")
 //~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~
 
 let currentUserId;
-let today = new Date().getTime()
+let today = new Date().getTime();
 let destinationsRepo;
+let traveler;
 
 const callOrder = () => {
 getUserId()
@@ -42,7 +42,7 @@ const getUserId = () => {
 
 const verifyUser = () => {
   let userLogin = username.value.slice(0,8)
-  if (userLogin == 'traveler' && password.value ==  'travel') {
+  if (userLogin === 'traveler' && password.value ===  'travel') {
     loginSubmit()
   } else {
     invalidLogin()
@@ -58,7 +58,7 @@ const promiseAll = () => {
 const classInstantiation = (data) => {
   destinationsRepo = new Destinations(data[3].destinations)
   const travelersRepo = new Travelers(data[0].travelers, today)
-  const traveler = new Traveler(data[0].travelers[currentUserId], today)
+  traveler = new Traveler(data[0].travelers[currentUserId], today)
   const tripRepo = data[2].trips
   manageTravelerData(traveler, tripRepo, destinationsRepo)
 }
@@ -66,14 +66,14 @@ const classInstantiation = (data) => {
 const manageTravelerData = (traveler, tripRepo, destinationsRepo) => {
   greetUser(traveler.getUserName())
   traveler.makeAllTrips(tripRepo, destinationsRepo.destinations)
-  displayTrips(traveler)
+  displayAllTrips(traveler)
   addDestinationsToForm(destinationsRepo.destinations)
   displayYearlySpending(traveler)
   traveler.sortTrips()
 }
 
 const getDestinationId = (destination) => {
-const destinationID = destinationsRepo.destinations.filter(place => place.destination == destination)
+const destinationID = destinationsRepo.destinations.filter(place => place.destination === destination)
 return destinationID[0].id
 }
 
@@ -96,8 +96,36 @@ const resetInputs = () => {
   tripDuration.value = ''
   numTravelers.value = ''
   destinationDropDown.value = ''
+  displayAllTrips(traveler)
 }
 
+function logoutUser() {
+  console.log('logout')
+  location.reload()
+}
+
+const sendAllTrips = () => {
+  console.log('all')
+  displayAllTrips(traveler)
+}
+const sendUpcomingTrips = () => {
+  console.log('upcoming')
+  displayUpcomingTrips(traveler)
+}
+const sendPastTrips = () => {
+  console.log('past')
+  displayPastTrips(traveler)
+}
+const sendPendingTrips = () => {
+  console.log('pending')
+  displayPendingTrips(traveler)
+}
+
+upcomingTrp.addEventListener('click', sendUpcomingTrips)
+allTrp.addEventListener('click', sendAllTrips)
+pastTrp.addEventListener('click', sendPastTrips)
+pendingTrp.addEventListener('click', sendPendingTrips)
 bookBtn.addEventListener('click', submitTripRequest)
 submitLoginBtn.addEventListener('click', callOrder)
+logoutBtn.addEventListener('click', logoutUser)
 export {resetInputs}

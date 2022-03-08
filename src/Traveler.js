@@ -41,10 +41,6 @@ class Traveler {
     this.sortPastTrips();
     this.sortPendingTrips();
     this.sortUpcomingTrips()
-    console.log('past', this.past)
-    console.log('pres', this.present)
-    console.log('fut', this.upcoming)
-    console.log('pen', this.pending)
   }
 
   sortPresentTrips() {
@@ -61,7 +57,6 @@ class Traveler {
     this.allTrips.forEach(trip => {
       let tripDate = new Date(`${trip.date}`).getTime()
       let today = this.todaysDate
-      console.log(today)
       if (tripDate < today && !this.past.includes(trip)) {
         this.past.push(trip);
       }
