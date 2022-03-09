@@ -28,9 +28,9 @@ class Traveler {
   }
 
   getUserName() {
-  if (!this.name) {
-    return 'Hi, Friend! Please Add Your Name To Your User Profile!'
-  }
+    if (!this.name) {
+      return 'Hi, Friend! Please Add Your Name To Your User Profile!'
+    }
     let name = this.name
     let firstName = name.split(' ')
     return `Welcome, ${firstName[0]}! Ready To Wander?`
@@ -83,14 +83,14 @@ class Traveler {
   }
 
   getThisYearsTripCost() {
-  let date = new Date().toLocaleDateString("en-US").split("/")
-  let yearlyTrips = this.allTrips.filter(trip => trip.date.includes(date[2]))
-  let yearlyCost = yearlyTrips.reduce((acc, trip) => {
-    trip.estimatedTripCost();
-    acc += trip.tripCost;
-    return acc;
-  }, 0);
-  return `You Have Spent $${yearlyCost} On Travel So Far This Year!`;
+    let date = new Date().toLocaleDateString("en-US").split("/")
+    let yearlyTrips = this.allTrips.filter(trip => trip.date.includes(date[2]))
+    let yearlyCost = yearlyTrips.reduce((acc, trip) => {
+      trip.estimatedTripCost();
+      acc += trip.tripCost;
+      return acc;
+    }, 0);
+    return `You Have Spent $${yearlyCost} On Travel So Far This Year!`;
   }
 }
 
