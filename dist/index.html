@@ -1,74 +1,77 @@
 <!DOCTYPE html>
 <html lang="en-US">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WanderList Travel Tracker</title>
 </head>
+
 <body>
-</div>
-<div class="login-section" id="loginSection">
-<section class="login-page"id="loginPage" >
-<h1>Welcome to Wanderlist!</h1>
-<h2 id="loginMessage">Enter Your Login info to continue</h2>
-<img class="login-img" src="./images/airplane-plane-pngrepo-com.png" alt="plane taking off logo">
-<div class="login-inputs">
-  <p class="login-error hidden">Incorrect password or username, <br> please try again!</p>
-  <label for="username" class="login-labels">Username:
-    <input type="text" placeholder="username" id="username" name="user-name">
-  </label>
-  <label for="password" class="login-labels"> Password:
-    <input type="password" placeholder="password" id="password" name="password">
-  </label>
-  <button class="submit small-btn" id="submitLoginBtn">Login</button>
-</div>
-</div>
+  </div>
+  <div class="login-section" id="loginSection">
+    <section class="login-page" id="loginPage">
+      <h1>Welcome to Wanderlist!</h1>
+      <h2 id="loginMessage">Enter Your Login info to continue</h2>
+      <img class="login-img" src="./images/airplane-plane-pngrepo-com.png" alt="plane taking off logo">
+      <div class="login-inputs">
+        <p class="login-error hidden">Incorrect password or username, <br> please try again!</p>
+        <label for="username" class="login-labels">Username:
+          <input type="text" placeholder="username" id="username" name="user-name">
+        </label>
+        <label for="password" class="login-labels"> Password:
+          <input type="password" placeholder="password" id="password" name="password">
+        </label>
+        <button class="submit small-btn" id="submitLoginBtn">Login</button>
+      </div>
+  </div>
   <div class="main-page hidden" id="mainPage">
-        <header>
-          <div class="left">
-            <h1>Welcome to Wanderlist!</h1>
-            <img class="login-img" src="./images/airplane-plane-pngrepo-com.png" alt="plane taking off logo">
-            <h1 class="greeting" id="greeting">Welcome, User</h1>
-            <h2></h2>
-          </div>
-          <div class="right">
-            <button class="logout small-btn" id="logoutBtn" >Log Out</button>
-            <h2 id="spending">Total Spent this year: $$</h2>
-          </div>
-        </header>
-        <section class="adventure">
-          <h3>BOOKING</h3>
-          <div class="booking">
-            <label for="start">Start date:
-              <input required type="date" id="startDate" name="trip-start" min="2000-01-01" max="2035-12-31" required>
-            </label>
-            <label  for="trip-duration">Duration (days):
-              <input required class="trip-duration" id="tripDuration" type="number" min="1" required>
-            </label>
-            <label for="num-travelers">Number of travelers:
-              <input required class="num-travelers" type="number" id="numTravelers" min="1" required>
-            </label>
-            <label for="drop">Choose a destination:
-              <select class="drop" id="destinationDropDown" required>
-                <option value="0">destination</option>
-              </select>
-            </label>
-          </div>
-          <h4 class="selection-err"id="errorTag"></h4>
-          <button class="book-btn" id="bookBtn">Request Trip</button>
-        </section>
-        <section class="trips">
-          <div class="tabs">
-            <button class="trip-btns" id="upcomingTrp">Upcoming Trips</button>
-            <button class="trip-btns" id="allTrp">All Trips</button>
-            <button class="trip-btns" id="pendingTrp">Pending Trips</button>
-            <button class="trip-btns" id="pastTrp">Past Trips</button>
-          </div>
-          <h2 id="trip-type-section"></h2>
-          <div class="card-container" id='cardContainer'>
-        </section>
-    </div>
+    <header>
+      <div class="left">
+        <h1>Welcome to Wanderlist!</h1>
+        <img class="login-img" src="./images/airplane-plane-pngrepo-com.png" alt="plane taking off logo">
+        <h1 class="greeting" id="greeting">Welcome, User</h1>
+        <h2></h2>
+      </div>
+      <div class="right">
+        <button class="logout small-btn" id="logoutBtn">Log Out</button>
+        <h2 id="spending">Total Spent this year: $$</h2>
+      </div>
+    </header>
+    <section class="adventure">
+      <h3>BOOKING</h3>
+      <div class="booking">
+        <label for="start">Start date:
+          <input required type="date" id="startDate" name="trip-start" min="2000-01-01" max="2035-12-31" required>
+        </label>
+        <label for="trip-duration">Duration (days):
+          <input required class="trip-duration" id="tripDuration" type="number" min="1" required>
+        </label>
+        <label for="num-travelers">Number of travelers:
+          <input required class="num-travelers" type="number" id="numTravelers" min="1" required>
+        </label>
+        <label for="drop">Choose a destination:
+          <select class="drop" id="destinationDropDown" required>
+            <option value="0">destination</option>
+          </select>
+        </label>
+      </div>
+      <h4 class="selection-err" id="errorTag"></h4>
+      <button class="book-btn" id="bookBtn">Request Trip</button>
+    </section>
+    <section class="trips">
+      <div class="tabs">
+        <button class="trip-btns" id="upcomingTrp">Upcoming Trips</button>
+        <button class="trip-btns" id="allTrp">All Trips</button>
+        <button class="trip-btns" id="pendingTrp">Pending Trips</button>
+        <button class="trip-btns" id="pastTrp">Past Trips</button>
+      </div>
+      <h2 id="trip-type-section"></h2>
+      <div class="card-container" id='cardContainer'>
+    </section>
+  </div>
   <script src="bundle.js"></script>
 </body>
+
 </html>

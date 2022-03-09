@@ -1,15 +1,30 @@
 //~~~~~~~~~~~~IMPORTS~~~~~~~~~~~~~~~~~~~
-import {greetUser, displayYearlySpending, displayAllTrips, displayUpcomingTrips,
-  displayPastTrips, displayPendingTrips, invalidLogin, loginSubmit, addDestinationsToForm} from './domUpdates.js';
+import {
+  greetUser,
+  displayYearlySpending,
+  displayAllTrips,
+  displayUpcomingTrips,
+  displayPastTrips,
+  displayPendingTrips,
+  invalidLogin,
+  loginSubmit,
+  addDestinationsToForm
+} from './domUpdates.js';
 import './css/styles.css';
 import Destinations from './Destinations';
 import Travelers from './Travelers';
 import Traveler from './Traveler';
-import { getAllFetch, allTravelers, oneTraveler, allTrips, allDestinations, postTripRequest} from './apiCalls.js'
+import {
+  getAllFetch,
+  allTravelers,
+  oneTraveler,
+  allTrips,
+  allDestinations,
+  postTripRequest
+} from './apiCalls.js'
 import './images/airplane-plane-pngrepo-com.png'
 
 //~~~~~~~~~~~~QUERY SELECTORS~~~~~~~~~~~~
-
 const upcomingTrp = document.querySelector("#upcomingTrp")
 const allTrp = document.querySelector("#allTrp")
 const pendingTrp = document.querySelector("#pendingTrp")
@@ -23,22 +38,22 @@ const tripDuration = document.querySelector("#tripDuration")
 const numTravelers = document.querySelector("#numTravelers")
 const bookBtn = document.querySelector("#bookBtn")
 
-//~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~
-
+//~~~~~~~~~~~~GLOBAL VARIABLES~~~~~~~~~~~
 let currentUserId;
 let today = new Date().getTime();
 let destinationsRepo;
 let traveler;
 
+//~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~
 const getUserId = () => {
-  currentUserId = username.value.slice(8) - 1
+  currentUserId = username.value.slice(8)
   verifyUser()
   promiseAll()
 }
 
 const verifyUser = () => {
-  let userLogin = username.value.slice(0,8)
-  if (userLogin === 'traveler' && password.value ===  'travel') {
+  let userLogin = username.value.slice(0, 8)
+  if (userLogin === 'traveler' && password.value === 'travel') {
     loginSubmit()
   } else {
     invalidLogin()
@@ -48,13 +63,13 @@ const verifyUser = () => {
 const promiseAll = () => {
   getAllFetch();
   Promise.all([allTravelers, oneTraveler, allTrips, allDestinations])
-  .then(data => classInstantiation(data))
+    .then(data => classInstantiation(data))
 }
 
 const classInstantiation = (data) => {
   destinationsRepo = new Destinations(data[3].destinations)
   const travelersRepo = new Travelers(data[0].travelers, today)
-  traveler = new Traveler(data[0].travelers[currentUserId], today)
+  traveler = new Traveler(data[0].travelers[currentUserId - 1], today)
   const tripRepo = data[2].trips
   manageTravelerData(traveler, tripRepo, destinationsRepo)
 }
@@ -69,8 +84,8 @@ const manageTravelerData = (traveler, tripRepo, destinationsRepo) => {
 }
 
 const getDestinationId = (destination) => {
-const destinationID = destinationsRepo.destinations.filter(place => place.destination === destination)
-return destinationID[0].id
+  const destinationID = destinationsRepo.destinations.filter(place => place.destination === destination)
+  return destinationID[0].id
 }
 
 const submitTripRequest = () => {
@@ -121,4 +136,7 @@ pendingTrp.addEventListener('click', sendPendingTrips)
 bookBtn.addEventListener('click', submitTripRequest)
 submitLoginBtn.addEventListener('click', getUserId)
 logoutBtn.addEventListener('click', logoutUser)
-export {resetInputs, promiseAll}
+export {
+  resetInputs,
+  promiseAll
+}
